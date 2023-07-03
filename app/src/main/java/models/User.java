@@ -1,5 +1,7 @@
 package models;
 
+import android.widget.TextView;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -35,6 +37,20 @@ public class User {
     @TypeConverters
     private Date modified_at;
     private boolean isLocked;
+
+    public User(String username, @NotNull String password, @NotNull String first_name, @NotNull String last_name, String email, boolean isMale, String address, @NotNull String phoneNumber, Date created_at, Date modified_at, boolean isLocked) {
+        this.username = username;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.isMale = isMale;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.created_at = created_at;
+        this.modified_at = modified_at;
+        this.isLocked = isLocked;
+    }
 
     public int getUserId() {
         return userId;
