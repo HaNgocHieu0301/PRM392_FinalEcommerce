@@ -14,7 +14,8 @@ public abstract class ProductRoomDatabase extends RoomDatabase {
     public abstract IProductDAO productDAO();
     public static ProductRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class)
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class, "Product")
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }
