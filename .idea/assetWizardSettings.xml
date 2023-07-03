@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/favorite_border/baseline_favorite_border_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/shopping_cart/baseline_shopping_cart_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,7 +34,7 @@
                         <option name="values">
                           <map>
                             <entry key="opacityPercent" value="50" />
-                            <entry key="outputName" value="baseline_favorite_border_18" />
+                            <entry key="outputName" value="cart_img" />
                             <entry key="sourceFile" value="C:\Users\Mai\OneDrive\Documents\SE1637\SU23\PRM392\Project" />
                           </map>
                         </option>
