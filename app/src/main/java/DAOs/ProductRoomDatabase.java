@@ -1,6 +1,7 @@
 package DAOs;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -14,7 +15,7 @@ public abstract class ProductRoomDatabase extends RoomDatabase {
     public abstract IProductDAO productDAO();
     public static ProductRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class)
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class,"PRM_DB")
                     .allowMainThreadQueries()
                     .build();
         }
