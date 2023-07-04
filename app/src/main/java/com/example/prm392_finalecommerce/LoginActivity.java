@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.cookie.Cookie;
+import okhttp3.Cookie.Builder;
 
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
@@ -22,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+
 
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
@@ -45,10 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CookieManager cookieManager = CookieManager.getInstance();
                 IUserDAO userDAO = UserRoomDatabase.getDatabase(getApplicationContext()).userDAO();
-                User user = userDAO.getUserByUsername(username.getText().toString());
+                String un = username.getText().toString();
+                User user = userDAO.getUserByUsername(un);
                 if (user != null) {
                     if (Ps.equals(user.getPassword())) {
+                        cookieManager.setCookie("https://login.com", "username=un; password=Ps");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
