@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
@@ -40,19 +42,8 @@ public class SignUpActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
 
         Date currentTime = Calendar.getInstance().getTime();
-        Validate v = new Validate();
 
-        String Semail = email.toString();
-        String Suname = uname.toString();
-        String Sfname = fname.toString();
-        String Slname = lname.toString();
-        String Sphone = phone.toString();
-        String Saddress = address.toString();
-        String Spass = pass.toString();
-        String Scpass = cpass.toString();
 
-        String hasingPW = v.doHashing(Spass);
-        String hasingCPW = v.doHashing(Scpass);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +55,18 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String Semail = email.getText().toString();
+                String Suname = uname.getText().toString();
+                String Sfname = fname.getText().toString();
+                String Slname = lname.getText().toString();
+                String Sphone = phone.getText().toString();
+                String Saddress = address.getText().toString();
+                String Spass = pass.getText().toString();
+                String Scpass = cpass.getText().toString();
+                Validate validate = new Validate();
+
+                String hasingPW = validate.doHashing(Spass);
+                String hasingCPW = validate.doHashing(Scpass);
                 boolean gender = false;
                 RadioGroup genderGroup = findViewById(R.id.gender_group);
                 int selectedId = genderGroup.getCheckedRadioButtonId();
@@ -94,26 +97,34 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
+    public boolean checkName (String str){
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._-]+$");
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private Boolean checkInfo(String Cuname, String Cpass, String Cfname, String Clname, String Cemail, String Cphone, String Caddress) {
         Validate v = new Validate();
 
         if (v.checkPass(Cpass) == false) {
-            email.requestFocus();
-            email.setError("Wrong format password");
+            pass.requestFocus();
+            pass.setError("Wrong format password");
             return false;
         }
-        if (v.checkName(Cuname) == false) {
+        if (checkName(Cuname) == false) {
             uname.requestFocus();
             uname.setError("Please re-enter Username");
             return false;
         }
-        if (v.checkName(Cfname) == false) {
+        if (checkName(Cfname) == false) {
             fname.requestFocus();
             fname.setError("Please re-enter Firstname");
             return false;
         }
-        if (v.checkName(Clname) == false) {
+        if (checkName(Clname) == false) {
             lname.requestFocus();
             lname.setError("Please re-enter Lastname");
             return false;
@@ -128,7 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
             phone.setError("Please re-enter Phone");
             return false;
         }
-        if (v.checkName(Caddress) == false) {
+        if (checkName(Caddress) == false) {
             address.requestFocus();
             address.setError("Please re-enter Address");
             return false;
