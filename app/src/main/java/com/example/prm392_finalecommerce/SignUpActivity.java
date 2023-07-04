@@ -24,6 +24,10 @@ public class SignUpActivity extends AppCompatActivity {
     TextView login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signup);
+
         email = findViewById(R.id.signup_email);
         uname = findViewById(R.id.signup_username);
         fname = findViewById(R.id.signup_fname);
@@ -34,8 +38,6 @@ public class SignUpActivity extends AppCompatActivity {
         cpass = findViewById(R.id.signup_cpass);
         signUp = findViewById(R.id.signup_button);
         login = findViewById(R.id.login);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
 
         Date currentTime = Calendar.getInstance().getTime();
         Validate v = new Validate();

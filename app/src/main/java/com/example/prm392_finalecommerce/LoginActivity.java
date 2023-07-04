@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.cookie.Cookie;
-import okhttp3.Cookie.Builder;
-
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
 import models.User;
@@ -25,8 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-
 
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
