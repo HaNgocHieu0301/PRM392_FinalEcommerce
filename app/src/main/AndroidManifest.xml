@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -20,9 +20,8 @@
         android:theme="@style/Theme.PRM392_FinalEcommerce"
         tools:targetApi="31">
         <activity
-            android:name=".DashboardActivity"
-            android:exported="true"
-            android:theme="@style/NoAction">
+            android:name=".HomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +29,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:theme="@style/NoAction">
+        </activity>
+        <activity
             android:name=".CreateProduct"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".SignUpActivity"
@@ -44,7 +49,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
