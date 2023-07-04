@@ -7,16 +7,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-<!--        <EditText-->
-<!--            android:elevation="3dp"-->
-<!--            android:id="@+id/search_box"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:drawableLeft="@mipmap/ic_search_trans"-->
-<!--            android:padding="13dp"-->
-<!--            android:drawablePadding="5dp"-->
-<!--            android:hint="Search"/>-->
+        <!--        <EditText-->
+        <!--            android:elevation="3dp"-->
+        <!--            android:id="@+id/search_box"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="8dp"-->
+        <!--            android:drawableLeft="@mipmap/ic_search_trans"-->
+        <!--            android:padding="13dp"-->
+        <!--            android:drawablePadding="5dp"-->
+        <!--            android:hint="Search"/>-->
         <LinearLayout
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -125,4 +125,5 @@
             android:id="@+id/recomended_rec">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+
 </LinearLayout>

@@ -89,5 +89,7 @@
     <string name="title_activity_view_address">ViewAddress</string>
     <string name="prof">Profile</string>
     <string name="update">Update</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
