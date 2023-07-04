@@ -22,10 +22,10 @@ public class ProductRepository {
         products = productDAO.getAll();
     }
 
-    public void insertUser(Product...products){
+    public void insertProducts(Product...products){
         productRoomDatabase.productDAO().insert(products);
     }
-    public List<Product> getAllUser(){
+    public List<Product> getAllProducts(){
         return products;
     }
 }
