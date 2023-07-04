@@ -35,7 +35,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="Description"/>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -47,7 +47,14 @@
                 android:text="Discount 20% Off"
                 android:textColor="@color/purple_700"
                 android:textStyle="bold"
-                android:gravity="end"/>
-        </LinearLayout>
+                android:layout_alignParentLeft="true"/>
+            <Button
+                android:id="@+id/btn_add_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD TO CART"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

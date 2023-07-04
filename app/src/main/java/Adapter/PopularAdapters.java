@@ -42,7 +42,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         Glide.with(context).load(productList.get(position).image).into(holder.popImg);
         holder.name.setText(productList.get(position).productName);
         holder.description.setText(productList.get(position).description);
-        double dis = (double) Math.round(productList.get(position).discount * 100) / 100;
+        int dis = (int) Math.round(productList.get(position).discount);
         holder.discount.setText("Discount "+ dis + "% Off");
     }
 
@@ -96,8 +96,6 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             name = itemView.findViewById(R.id.pop_name);
             description = itemView.findViewById(R.id.pop_des);
             discount = itemView.findViewById(R.id.pop_dis);
-
-
         }
     }
 }
