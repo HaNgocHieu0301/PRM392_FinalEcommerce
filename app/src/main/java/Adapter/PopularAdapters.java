@@ -1,6 +1,9 @@
 package Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.prm392_finalecommerce.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+//import Helper.ImageDownloader;
+import Helper.ImageDownloader;
+import Repository.ProductRepository;
 import models.Product;
 
 public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHolder> implements Filterable {
@@ -39,7 +49,12 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapters.ViewHolder holder, int position) {
-        Glide.with(context).load(productList.get(position).image).into(holder.popImg);
+//        ImageDownloader i = new ImageDownloader(holder.popImg);
+//        i.execute(productList.get(position).image);
+        String imageUrl = productList.get(position).image;
+        Glide.with(context)
+                .load(imageUrl)
+                .into(holder.popImg);
         holder.name.setText(productList.get(position).productName);
         holder.description.setText(productList.get(position).description);
         int dis = (int) Math.round(productList.get(position).discount);
