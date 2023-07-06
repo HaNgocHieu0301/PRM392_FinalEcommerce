@@ -72,7 +72,7 @@ public class CreateProduct extends AppCompatActivity {
     private void addProduct(){
         Product p = new Product();
         p.productName = editTextProductName.getText().toString();
-        p.categoryName = editTextCategory.getText().toString();
+//        p.categoryName = editTextCategory.getText().toString();
         p.price =  Double.parseDouble(editTextPrice.getText().toString());
         p.discount = Double.parseDouble(editTextDiscount.getText().toString());
         p.unitsInStock = Integer.parseInt(editTextUnitsInStock.getText().toString());

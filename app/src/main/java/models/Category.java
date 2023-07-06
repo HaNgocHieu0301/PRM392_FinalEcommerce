@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "Category")
 public class Category {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
     private int categoryId;
     @NotNull
@@ -27,6 +27,12 @@ public class Category {
     }
 
     public void setCategoryName(@NotNull String categoryName) {
+        this.categoryName = categoryName;
+    }
+    public Category() {
+
+    }
+    public Category(String categoryName) {
         this.categoryName = categoryName;
     }
 }

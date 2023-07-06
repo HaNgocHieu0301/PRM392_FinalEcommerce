@@ -21,7 +21,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.prm392_finalecommerce.R;
 import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
@@ -31,6 +35,9 @@ import java.util.List;
 
 import Adapter.PopularAdapters;
 import DAOs.ProductRoomDatabase;
+import Repository.CategoryRepository;
+import Repository.ProductRepository;
+import models.Category;
 import models.Product;
 
 public class HomeFragment extends Fragment {
@@ -40,17 +47,59 @@ public class HomeFragment extends Fragment {
     PopularAdapters popularAdapters;
     SearchView searchView;
     MenuItem menuItem;
+    AutoCompleteTextView autoCompleteTxt;
+    ArrayAdapter<String> adapterItems;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        //products
         popularRec = binding.popRec;
-        productList = new ArrayList<>(ProductRoomDatabase.getDatabase(getActivity()).productDAO().getAll());
+        ProductRepository repo = new ProductRepository(getActivity().getApplication());
+        productList = new ArrayList<>(repo.getAllProducts());
+//        repo.insertProducts(
+//                new Product("Candy", 0, 10, "", 10, 100, "Candy des"),
+//                new Product("Laptop", 0, 20, "", 30, 200, "Laptop des"),
+//                new Product("Clothes", 0, 10, "", 200, 300, "Clothes des"),
+//                new Product("Giay", 0, 10, "", 200, 300, "Clothes des")
+//                );
         popularAdapters = new PopularAdapters(getActivity(), productList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         popularRec.setAdapter(popularAdapters);
         popularRec.setLayoutManager(linearLayoutManager);
+        //categories
+        CategoryRepository categoryRepository = new CategoryRepository(getActivity().getApplication());
+
+//        categoryRepository.insertCategories(
+//                new Category("Technology"),
+//                new Category("Candy"),
+//                new Category("Fashion")
+//                );
+        List<Category> categories = categoryRepository.getAllCategories();
+        List<String> strCategories = new ArrayList<>();
+        strCategories.add("All");
+        for(Category cate : categories) {
+            strCategories.add(cate.getCategoryName());
+        }
+        autoCompleteTxt = binding.autoCompleteTxt;
+        adapterItems = new ArrayAdapter<>(getContext(), R.layout.category_item, strCategories);
+        autoCompleteTxt.setAdapter(adapterItems);
+        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                ProductRepository repo = new ProductRepository(getActivity().getApplication());
+                if(item.equals("All"))
+                    productList = new ArrayList<>(repo.getAllProducts());
+                else
+                    productList = new ArrayList<>(repo.getAllProductsByCategoryName(getActivity().getApplication(), item));
+                popularAdapters = new PopularAdapters(getActivity(), productList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                popularRec.setAdapter(popularAdapters);
+                popularRec.setLayoutManager(linearLayoutManager);
+            }
+        });
         return root;
     }
 
