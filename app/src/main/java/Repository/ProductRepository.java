@@ -30,9 +30,11 @@ public class ProductRepository {
     public void insertProducts(Product...products){
         for(int i = 0; i < products.length; i++){
             long id = productRoomDatabase.productDAO().insert(products)[i];
+            Product p = products[i];
+            p.productId = (int)id;
             FirebaseFirestore.getInstance()
                     .collection("products")
-                    .add(products[i]);
+                    .add(p);
         }
     }
     public List<Product> getAllProducts(){

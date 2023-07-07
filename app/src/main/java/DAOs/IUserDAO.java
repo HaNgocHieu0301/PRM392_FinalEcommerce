@@ -16,7 +16,7 @@ public interface IUserDAO {
     @Query("SELECT * FROM User")
     public List<User> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(User... users);
+    public long[] insert(User... users);
     @Update
     public void update(User... users);
     @Delete
