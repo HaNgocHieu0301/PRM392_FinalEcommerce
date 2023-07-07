@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -49,16 +50,16 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapters.ViewHolder holder, int position) {
-//        ImageDownloader i = new ImageDownloader(holder.popImg);
-//        i.execute(productList.get(position).image);
         String imageUrl = productList.get(position).image;
         Glide.with(context)
                 .load(imageUrl)
                 .into(holder.popImg);
+        holder.id.setText(""+productList.get(position).productId);
         holder.name.setText(productList.get(position).productName);
         holder.description.setText(productList.get(position).description);
         int dis = (int) Math.round(productList.get(position).discount);
         holder.discount.setText("Discount "+ dis + "% Off");
+        holder.price.setText("$" + productList.get(position).price);
     }
 
     @Override
@@ -103,7 +104,8 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView popImg;
-        TextView name, description, discount;
+        TextView id, name, description, discount, price;
+        Button cartBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +113,21 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             name = itemView.findViewById(R.id.pop_name);
             description = itemView.findViewById(R.id.pop_des);
             discount = itemView.findViewById(R.id.pop_dis);
+            id = itemView.findViewById(R.id.pop_id);
+            price = itemView.findViewById(R.id.pop_price);
+            cartBtn = itemView.findViewById(R.id.btn_add_cart);
+            popImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int popId = Integer.parseInt(id.getText().toString());
+                }
+            });
+            cartBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 }
