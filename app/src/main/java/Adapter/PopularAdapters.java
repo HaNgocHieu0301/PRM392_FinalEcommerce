@@ -49,12 +49,12 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapters.ViewHolder holder, int position) {
-//        ImageDownloader i = new ImageDownloader(holder.popImg);
-//        i.execute(productList.get(position).image);
-        String imageUrl = productList.get(position).image;
-        Glide.with(context)
-                .load(imageUrl)
-                .into(holder.popImg);
+        ImageDownloader i = new ImageDownloader(holder.popImg);
+        i.execute("https://en.kepoper.com/wp-content/uploads/2020/11/g-dragon-comeback-4-e1604306039472.jpg");
+//        String imageUrl = productList.get(position).image;
+//        Glide.with(context)
+//                .load(imageUrl)
+//                .into(holder.popImg);
         holder.name.setText(productList.get(position).productName);
         holder.description.setText(productList.get(position).description);
         int dis = (int) Math.round(productList.get(position).discount);

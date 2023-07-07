@@ -16,7 +16,7 @@ public interface IProductDAO {
     @Query("SELECT * FROM Product")
     List<Product> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Product... products);
+    long[] insert(Product... products);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertAProduct(Product product);
     @Update

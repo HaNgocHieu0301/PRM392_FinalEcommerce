@@ -17,6 +17,7 @@ import java.util.List;
 
 import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
+import Repository.ProductRepository;
 import models.Product;
 
 public class CreateProduct extends AppCompatActivity {
@@ -81,7 +82,9 @@ public class CreateProduct extends AppCompatActivity {
         //ProductRepository repository = new ProductRepository();
         //repository.insertProducts(p);
         //productRepository.insertProduct(p);
-        long result = ProductRoomDatabase.getDatabase(CreateProduct.this).productDAO().insertAProduct(p);
+        ProductRepository repository = new ProductRepository(CreateProduct.this.getApplication());
+        repository.insertProducts(p);
+        //long result = ProductRoomDatabase.getDatabase(CreateProduct.this).productDAO().insertAProduct(p);
     }
 
     @Override

@@ -2,6 +2,10 @@ package Repository;
 
 import android.app.Application;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +28,12 @@ public class ProductRepository {
     }
 
     public void insertProducts(Product...products){
-        productRoomDatabase.productDAO().insert(products);
+        for(int i = 0; i < products.length; i++){
+            long id = productRoomDatabase.productDAO().insert(products)[i];
+            FirebaseFirestore.getInstance()
+                    .collection("products")
+                    .add(products[i]);
+        }
     }
     public List<Product> getAllProducts(){
         return products;
