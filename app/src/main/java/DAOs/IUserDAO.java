@@ -15,6 +15,8 @@ import models.User;
 public interface IUserDAO {
     @Query("SELECT * FROM User")
     public List<User> getAll();
+    @Query("SELECT * FROM user WHERE username =:uname")
+    public User getUserByUsername(String uname);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public long[] insert(User... users);
     @Update
