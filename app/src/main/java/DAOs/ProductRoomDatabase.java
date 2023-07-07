@@ -9,13 +9,14 @@ import androidx.room.RoomDatabase;
 
 import models.Product;
 
-@Database(entities = {Product.class}, version = 1)
+@Database(entities = {Product.class}, version = 2)
 public abstract class ProductRoomDatabase extends RoomDatabase {
     private static ProductRoomDatabase INSTANCE;
     public abstract IProductDAO productDAO();
     public static ProductRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class,"PRM_DB")
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ProductRoomDatabase.class,"Product")
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }

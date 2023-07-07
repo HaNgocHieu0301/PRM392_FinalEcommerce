@@ -28,4 +28,8 @@ public class ProductRepository {
     public List<Product> getAllProducts(){
         return products;
     }
+
+    public Product getProductById(int id){
+        return productDAO.getProductById(id);
+    }
 }
