@@ -77,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
-                    IUserDAO userDAO = UserRoomDatabase.getDatabase(getApplicationContext()).userDAO();
+                    IUserDAO userDAO = UserRoomDatabase.getDatabase(SignUpActivity.this).userDAO();
                     if (userDAO.getUserByUsername(Suname)==null){
                         if (hasingPW.equals(hasingCPW)) {
                             User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, (java.sql.Date) currentTime, (java.sql.Date) currentTime, false);
@@ -97,15 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean checkName (String str){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._-]+$");
-        Matcher matcher = pattern.matcher(str);
-        if (matcher.matches()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
     private Boolean checkInfo(String Cuname, String Cpass, String Cfname, String Clname, String Cemail, String Cphone, String Caddress) {
         Validate v = new Validate();
 
@@ -114,17 +106,17 @@ public class SignUpActivity extends AppCompatActivity {
             pass.setError("Wrong format password");
             return false;
         }
-        if (checkName(Cuname) == false) {
+        if (v.checkName(Cuname) == false) {
             uname.requestFocus();
             uname.setError("Please re-enter Username");
             return false;
         }
-        if (checkName(Cfname) == false) {
+        if (v.checkString(Cfname) == false) {
             fname.requestFocus();
             fname.setError("Please re-enter Firstname");
             return false;
         }
-        if (checkName(Clname) == false) {
+        if (v.checkString(Clname) == false) {
             lname.requestFocus();
             lname.setError("Please re-enter Lastname");
             return false;
@@ -139,7 +131,7 @@ public class SignUpActivity extends AppCompatActivity {
             phone.setError("Please re-enter Phone");
             return false;
         }
-        if (checkName(Caddress) == false) {
+        if (v.checkString(Caddress) == false) {
             address.requestFocus();
             address.setError("Please re-enter Address");
             return false;

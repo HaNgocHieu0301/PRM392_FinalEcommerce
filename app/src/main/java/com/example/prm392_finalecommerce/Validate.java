@@ -9,7 +9,8 @@ public class Validate {
     String EmailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
     String PhoneRegex = "^((\\+84)|0)(1[2689]|9)\\d{8}$";
     String UnameRegex = "^[a-zA-Z0-9._-]+$";
-//    String PassRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,20}$";
+    String StringRegex = "^[a-zA-Z0-9]+[a-zA-Z0-9,.-_ ]+$";
+    String PassRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,20}$";
     public boolean checkEmail (String Email){
         Pattern pattern = Pattern.compile(EmailRegex);
         Matcher matcher = pattern.matcher(Email);
@@ -29,7 +30,16 @@ public class Validate {
         }
     }
     public boolean checkName (String str){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._-]+$");
+        Pattern pattern = Pattern.compile(UnameRegex);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkString (String str){
+        Pattern pattern = Pattern.compile(StringRegex);
         Matcher matcher = pattern.matcher(str);
         if (matcher.matches()) {
             return true;
@@ -38,14 +48,13 @@ public class Validate {
         }
     }
     public boolean checkPass (String str){
-//        Pattern pattern = Pattern.compile();
-//        Matcher matcher = pattern.matcher(str);
-//        if (matcher.matches()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-        return true;
+        Pattern pattern = Pattern.compile(PassRegex);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public static String doHashing (String Password){
         try {
