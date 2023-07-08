@@ -29,11 +29,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewProductDetail"
-            android:exported="false">
-
-        </activity>
-        <activity
             android:name=".CreateProduct"
             android:exported="false" />
         <activity

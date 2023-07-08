@@ -26,4 +26,7 @@ public class WishRepository {
     public void deleteItem(Wish wish){
         wishDAO.delete(wish);
     }
+    public Wish getWishByUserIdAndProductId(int userId, int productId){
+        return wishDAO.getWishByUserIdAndProductId(userId, productId);
+    }
 }

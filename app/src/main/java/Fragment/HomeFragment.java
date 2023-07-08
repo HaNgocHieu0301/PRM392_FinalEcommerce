@@ -1,7 +1,5 @@
 package Fragment;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +23,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.prm392_finalecommerce.R;
 import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
@@ -34,13 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.PopularAdapters;
-import DAOs.ProductRoomDatabase;
 import Repository.CategoryRepository;
 import Repository.ProductRepository;
 import models.Category;
 import models.Product;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PopularAdapters.onClickListener {
     private FragmentHomeBinding binding;
     RecyclerView popularRec;
     List<Product> productList;
@@ -64,7 +60,8 @@ public class HomeFragment extends Fragment {
 //                new Product("Clothes", 0, 10, "", 200, 300, "Clothes des"),
 //                new Product("Giay", 0, 10, "", 200, 300, "Clothes des")
 //                );
-        popularAdapters = new PopularAdapters(getActivity(), productList);
+        popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), this);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         popularRec.setAdapter(popularAdapters);
         popularRec.setLayoutManager(linearLayoutManager);
@@ -94,7 +91,8 @@ public class HomeFragment extends Fragment {
                     productList = new ArrayList<>(repo.getAllProducts());
                 else
                     productList = new ArrayList<>(repo.getAllProductsByCategoryName(getActivity().getApplication(), item));
-                popularAdapters = new PopularAdapters(getActivity(), productList);
+                popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(),HomeFragment.this::viewProductDetail);
+
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 popularRec.setAdapter(popularAdapters);
                 popularRec.setLayoutManager(linearLayoutManager);
@@ -139,5 +137,15 @@ public class HomeFragment extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public void viewProductDetail(int productId) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment newFragment = new ProductDetail(productId);
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, newFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

@@ -22,4 +22,6 @@ public interface IWishDAO {
     void update(Wish... wishes);
     @Delete
     void delete(Wish... wish);
+    @Query("SELECT * FROM Wish WHERE UserId = :userId AND ProductId =:productId")
+    Wish getWishByUserIdAndProductId(int userId, int productId);
 }
