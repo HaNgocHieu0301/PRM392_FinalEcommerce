@@ -29,15 +29,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DashboardActivity"
-            android:exported="false"
-            android:theme="@style/NoAction">
-        </activity>
-        <activity
             android:name=".CreateProduct"
-            android:exported="true">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -49,7 +42,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true"/>
+
     </application>
 
 </manifest>

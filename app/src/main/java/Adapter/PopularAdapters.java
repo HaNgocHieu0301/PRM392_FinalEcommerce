@@ -1,9 +1,7 @@
 package Adapter;
 
+import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,27 +18,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.prm392_finalecommerce.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 //import Helper.ImageDownloader;
-import Helper.ImageDownloader;
-import Repository.ProductRepository;
+import Repository.WishRepository;
 import models.Product;
+import models.Wish;
 
 public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHolder> implements Filterable {
     private Context context;
     private List<Product> productList;
     private List<Product> productListOld;
+    private onClickListener listener;
+    private Application application;
 
-    public PopularAdapters(Context context, List<Product> productList) {
+    public PopularAdapters(Context context, List<Product> productList, Application application, onClickListener listener) {
         this.context = context;
         this.productList = productList;
         this.productListOld = productList;
+        this.application = application;
+        this.listener = listener;
     }
 
     @NonNull
@@ -116,18 +115,39 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             id = itemView.findViewById(R.id.pop_id);
             price = itemView.findViewById(R.id.pop_price);
             cartBtn = itemView.findViewById(R.id.btn_add_cart);
+
+//                    --------------------------GET USER ID HERE -----------------------------------
+            int userId = 0;
             popImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int popId = Integer.parseInt(id.getText().toString());
+                    int productId = Integer.parseInt(id.getText().toString());
+                    listener.viewProductDetail(productId);
+
                 }
             });
             cartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    int productId = Integer.parseInt(id.getText().toString());
+                    WishRepository wishRepository = new WishRepository(application);
+                    Wish wish = wishRepository.getWishByUserIdAndProductId(userId, productId);
+                    if(wish!=null){
+                        wish.quantity ++;
+                        wishRepository.updateItem(wish);
+                    }
+                    else {
+                        wish = new Wish(userId, productId, 1);
+                        wishRepository.insertItem(wish);
+                    }
+                    Toast.makeText(context, "Added to cart !", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
+
+    public interface onClickListener{
+        void viewProductDetail(int productId);
     }
 }

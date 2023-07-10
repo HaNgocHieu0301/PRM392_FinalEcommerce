@@ -29,24 +29,28 @@ public class ProductRepository {
     public List<Product> getAllProducts(){
         return products;
     }
-    public List<Product> getAllProductsByCategoryName(Application application, String name){
+    
+    public List<Product> getAllProductsByCategoryName(Application application, String name) {
         CategoryRepository categoryRepository = new CategoryRepository(application);
         List<Category> categories = categoryRepository.getAllCategories();
         List<Product> res = new ArrayList<>();
         int categoryId = -1;
-        for(Category category : categories) {
-            if(category.getCategoryName().equals(name)) {
+        for (Category category : categories) {
+            if (category.getCategoryName().equals(name)) {
                 categoryId = category.getCategoryId();
             }
         }
-        if(categoryId != -1) {
-            for(Product p : products) {
-                if(p.categoryId == categoryId) {
+        if (categoryId != -1) {
+            for (Product p : products) {
+                if (p.categoryId == categoryId) {
                     res.add(p);
                 }
             }
         }
-
         return res;
+    }
+
+    public Product getProductById(int id){
+        return productDAO.getProductById(id);
     }
 }
