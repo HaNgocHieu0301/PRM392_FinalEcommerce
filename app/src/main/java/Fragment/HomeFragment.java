@@ -1,6 +1,5 @@
 package Fragment;
 
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.app.SearchManager;
 import android.content.Context;

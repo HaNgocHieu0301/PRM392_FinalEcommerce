@@ -22,8 +22,12 @@ public class Product {
     public double discount;
     @ColumnInfo(name = "UnitsInStock")
     public int unitsInStock;
+
     @ColumnInfo(name = "Description")
     public String description;
+
+    @ColumnInfo(name = "IsShow")
+    public boolean isShow;
     public Product() {
 
     }
@@ -35,5 +39,6 @@ public class Product {
         this.discount = discount;
         this.unitsInStock = unitsInStock;
         this.description = description;
+        isShow = true;
     }
 }

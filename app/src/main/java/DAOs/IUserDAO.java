@@ -15,7 +15,7 @@ import models.User;
 public interface IUserDAO {
     @Query("SELECT * FROM User")
     public List<User> getAll();
-    @Query("SELECT * FROM user WHERE username =:uname")
+    @Query("SELECT * FROM User WHERE username =:uname")
     public User getUserByUsername(String uname);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public long[] insert(User... users);
@@ -23,4 +23,7 @@ public interface IUserDAO {
     public void update(User... users);
     @Delete
     public void delete(User... users);
+
+    @Query("DELETE FROM User")
+    void removeAll();
 }
