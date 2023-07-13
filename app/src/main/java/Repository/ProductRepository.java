@@ -34,7 +34,6 @@ public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
     IProductDAO productDAO;
     private List<Product> products;
-
     public ProductRepository(Application application) {
         productRoomDatabase = ProductRoomDatabase.getDatabase(application);
         productDAO = productRoomDatabase.productDAO();
@@ -44,6 +43,7 @@ public class ProductRepository {
     public void insertProducts(Product... products) {
         for (int i = 0; i < products.length; i++) {
             long id = productRoomDatabase.productDAO().insert(products)[i];
+
             Product p = products[i];
             p.productId = (int) id;
             FirebaseFirestore.getInstance().collection("products").add(p);
@@ -53,6 +53,7 @@ public class ProductRepository {
     public List<Product> getAllProducts() {
         return products;
     }
+    
     public List<Product> getAllShowedProducts(){
         List<Product> filteredList = new ArrayList<>();
         for (Product obj : products) {
@@ -102,5 +103,8 @@ public class ProductRepository {
                 }
             }
         });
+    public Product getProductById(int id){
+        return productDAO.getProductById(id);
+    }
     }
 }

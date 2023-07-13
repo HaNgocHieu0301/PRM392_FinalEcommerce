@@ -1,6 +1,5 @@
 package Fragment;
 
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ import Repository.ProductRepository;
 import models.Category;
 import models.Product;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PopularAdapters.onClickListener {
     private FragmentHomeBinding binding;
     RecyclerView popularRec;
     List<Product> productList;
@@ -138,5 +139,15 @@ public class HomeFragment extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public void viewProductDetail(int productId) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment newFragment = new ProductDetail(productId);
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, newFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

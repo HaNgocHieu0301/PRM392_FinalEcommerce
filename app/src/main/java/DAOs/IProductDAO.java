@@ -16,8 +16,9 @@ import models.Product;
 public interface IProductDAO {
     @Query("SELECT * FROM Product")
     List<Product> getAll();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long[] insert(Product... products);
+	long[] insert(Product... products);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertAProduct(Product product);
     @Update
@@ -27,4 +28,8 @@ public interface IProductDAO {
 
     @Query("DELETE FROM Product")
     void removeAll();
+
+    @Query("SELECT * FROM Product WHERE productId = :pId")
+    Product getProductById(int pId);
+
 }
