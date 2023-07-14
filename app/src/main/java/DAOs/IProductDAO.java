@@ -14,11 +14,15 @@ import models.Product;
 @Dao
 public interface IProductDAO {
     @Query("SELECT * FROM Product")
-    public List<Product> getAll();
+    List<Product> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(Product... products);
+    void insert(Product... products);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insertAProduct(Product product);
     @Update
-    public void update(Product... products);
+    void update(Product... products);
     @Delete
-    public void delete(Product... products);
+    void delete(Product... products);
+    @Query("SELECT * FROM Product WHERE productId = :pId")
+    Product getProductById(int pId);
 }
