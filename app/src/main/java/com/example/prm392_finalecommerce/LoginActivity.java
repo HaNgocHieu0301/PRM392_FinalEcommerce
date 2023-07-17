@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 String Pass = validate.doHashing(password.getText().toString());
                 User user = userDAO.getUserByUsername(Uname);
                 if (user != null) {
-                    if (Pass.equals(user.getPassword())) {
+                    if (Pass.equals(user.password)) {
                         cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");
                         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                         startActivity(intent);
