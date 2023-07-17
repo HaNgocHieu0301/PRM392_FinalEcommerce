@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300422577677",
+    "project_id": "prm392-finalproject-ba4cb",
+    "storage_bucket": "prm392-finalproject-ba4cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300422577677:android:32fc6222d2a0ed4f79df44",
+        "android_client_info": {
+          "package_name": "com.example.prm392_finalecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300422577677-v1857arsu023hhv6uirie9jp36s1h826.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp_H9QSVUKFNbRHZzaStODGdCp7bDjths"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300422577677-v1857arsu023hhv6uirie9jp36s1h826.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
