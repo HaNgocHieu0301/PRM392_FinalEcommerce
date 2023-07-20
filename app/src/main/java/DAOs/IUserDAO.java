@@ -23,7 +23,6 @@ public interface IUserDAO {
     public void update(User... users);
     @Delete
     public void delete(User... users);
-
     @Query("DELETE FROM User")
     void removeAll();
 }

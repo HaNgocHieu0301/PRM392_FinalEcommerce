@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import models.Product;
 
-@Database(entities = {Product.class}, version = 2)
+@Database(entities = {Product.class}, version = 1)
 public abstract class ProductRoomDatabase extends RoomDatabase {
     private static ProductRoomDatabase INSTANCE;
     public abstract IProductDAO productDAO();

@@ -12,7 +12,6 @@ public class Category {
     private int categoryId;
     @NotNull
     private String categoryName;
-
     public int getCategoryId() {
         return categoryId;
     }

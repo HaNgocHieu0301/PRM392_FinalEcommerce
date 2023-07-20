@@ -18,17 +18,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import DAOs.DataInsertionCallback;
 import DAOs.IProductDAO;
-import DAOs.IUserDAO;
 import DAOs.ProductRoomDatabase;
-import DAOs.UserRoomDatabase;
 import models.Category;
 import models.Product;
-import models.User;
 
 public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
@@ -105,5 +109,22 @@ public class ProductRepository {
     }
     public Product getProductById(int id){
         return productDAO.getProductById(id);
+    }
+
+    public void InsertDataFromFirebaseToSqlite(Application application) {
+        Task<QuerySnapshot> task = FirebaseFirestore.getInstance()
+                .collection("products")
+                .get();
+        task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                productDAO.removeAll();
+                List<DocumentSnapshot> lst = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot d : lst) {
+                    Product p = d.toObject(Product.class);
+                    productDAO.insert(p);
+                }
+            }
+        });
     }
 }

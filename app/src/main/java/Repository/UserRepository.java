@@ -47,6 +47,16 @@ public class UserRepository {
         return userRoomDatabase.userDAO().getUserByUsername(uname);
     }
 
+    private boolean isUserPrimaryKeyValid(String uniqueId) {
+        for (User p: users) {
+            if(p.userId == uniqueId){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
     public List<User> getAllUser() {
         return users;
     }

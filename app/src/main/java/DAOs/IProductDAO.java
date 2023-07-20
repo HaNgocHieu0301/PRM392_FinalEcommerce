@@ -16,7 +16,6 @@ import models.Product;
 public interface IProductDAO {
     @Query("SELECT * FROM Product")
     List<Product> getAll();
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
 	long[] insert(Product... products);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,5 +30,4 @@ public interface IProductDAO {
 
     @Query("SELECT * FROM Product WHERE productId = :pId")
     Product getProductById(int pId);
-
 }

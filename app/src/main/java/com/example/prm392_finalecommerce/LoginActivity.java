@@ -26,8 +26,6 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
-        Validate v = new Validate();
-        String Ps = v.doHashing(password.getText().toString());
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView signup = findViewById(R.id.login_create);
         TextView fgPass = findViewById(R.id.login_forgetPass);
@@ -46,14 +44,15 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Validate validate = new Validate();
                 CookieManager cookieManager = CookieManager.getInstance();
                 UserRepository userRepository = new UserRepository(LoginActivity.this.getApplication());
                 String un = username.getText().toString();
                 User user = userRepository.getUserByUsername(un);
                 if (user != null) {
-                    if (Ps.equals(user.getPassword())) {
-                        cookieManager.setCookie("https://login.com", "username=un; password=Ps");
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    if (Pass.equals(user.password)) {
+                        cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");
+                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
