@@ -15,7 +15,7 @@ import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
 import models.Category;
 import models.Product;
-import models.ProductTmp;
+import models.Wish;
 
 public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
@@ -35,11 +35,19 @@ public class ProductRepository {
         //    FirebaseFirestore.getInstance().collection("products").add(p);
         }
     }
-    public long insertProduct(Product product) {
-        return productRoomDatabase.productDAO().insert(product)[0];
+
+    public List<Product> GetProductsShow(List<Product> productList){
+        List<Product> newList = new ArrayList<>();
+        for(Product product : productList)
+        {
+            if(product.isShow)
+                newList.add(product);
+        }
+        return newList;
     }
+
     public List<Product> getAllProducts() {
-        return products;
+        return GetProductsShow(products);
     }
     
     public List<Product> getAllShowedProducts(){
@@ -69,16 +77,9 @@ public class ProductRepository {
                 }
             }
         }
-        return res;
+        return GetProductsShow(res);
     }
 
-    public Product getProductById(int id){
-        return productDAO.getProductById(id);
-    }
-
-    public void UpdateProduct(Product p){
-        productDAO.update(p);
-    }
 
     public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionByFirebaseCallback callback) {
         Task<QuerySnapshot> task = FirebaseFirestore.getInstance()
@@ -105,5 +106,29 @@ public class ProductRepository {
                 }
             }
         });
+    }
+    public Product getProductById(int id){
+        return productDAO.getProductById(id);
+    }
+
+    public void InsertDataFromFirebaseToSqlite(Application application) {
+        Task<QuerySnapshot> task = FirebaseFirestore.getInstance()
+                .collection("products")
+                .get();
+        task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                productDAO.removeAll();
+                List<DocumentSnapshot> lst = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot d : lst) {
+                    Product p = d.toObject(Product.class);
+                    productDAO.insert(p);
+                }
+            }
+        });
+    }
+
+    public void updateProduct(Product product) {
+        productDAO.update(product);
     }
 }

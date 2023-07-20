@@ -32,8 +32,10 @@ import java.util.List;
 import Adapter.PopularAdapters;
 import Repository.CategoryRepository;
 import Repository.ProductRepository;
+import Repository.UserRepository;
 import models.Category;
 import models.Product;
+import models.User;
 
 public class HomeFragment extends Fragment implements PopularAdapters.onClickListener {
     private FragmentHomeBinding binding;
@@ -54,10 +56,10 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
         ProductRepository repo = new ProductRepository(getActivity().getApplication());
         productList = new ArrayList<>(repo.getAllProducts());
 //        repo.insertProducts(
-//                new Product("Candy", 0, 10, "", 10, 100, "Candy des"),
-//                new Product("Laptop", 0, 20, "", 30, 200, "Laptop des"),
-//                new Product("Clothes", 0, 10, "", 200, 300, "Clothes des"),
-//                new Product("Giay", 0, 10, "", 200, 300, "Clothes des")
+//                new Product("Candy", 1, 10, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 10, 100, "Candy des"),
+//                new Product("Laptop", 2, 20, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 30, 200, "Laptop des"),
+//                new Product("Clothes", 3, 10, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 200, 300, "Clothes des"),
+//                new Product("Giay", 3, 10, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 200, 300, "Clothes des")
 //                );
         popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -71,6 +73,11 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
 //                new Category("Candy"),
 //                new Category("Fashion")
 //                );
+
+//        UserRepository userRepository = new UserRepository(getActivity().getApplication());
+//        userRepository.insertUser(
+//                new User("maintt","123", "Mai", "Nguyen",null, false, "Tran Nhat Duat, Kim Tan, Lao Cai", "0294482384", null, null, false)
+//        );
         List<Category> categories = categoryRepository.getAllCategories();
         List<String> strCategories = new ArrayList<>();
         strCategories.add("All");

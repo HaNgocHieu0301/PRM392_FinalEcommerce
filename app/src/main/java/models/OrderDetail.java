@@ -32,5 +32,4 @@ public class OrderDetail {
     @NotNull
     @ColumnInfo(name = "discount")
     public double discount;
-
 }

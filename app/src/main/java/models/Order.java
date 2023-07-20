@@ -26,10 +26,12 @@ public class Order {
 
     @ColumnInfo(name = "orderDate")
     @NotNull
-    public Date orderDate;
+    @TypeConverters
+    public String orderDate;
 
     @ColumnInfo(name = "shippedDate")
-    public Date shippedDate;
+    @TypeConverters
+    public String shippedDate;
 
     @ColumnInfo(name = "shipAddress")
     @NotNull
@@ -50,13 +52,4 @@ public class Order {
     @ColumnInfo(name = "total")
     public double total;
 
-    public List<OrderDetail> orderDetails;
-
-    public double GetTotal(){
-        total = 0;
-        for (OrderDetail od: orderDetails) {
-            total += (od.unitPrice*od.quantity)*(1-od.discount/100);
-        }
-        return total;
-    }
 }

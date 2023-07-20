@@ -20,13 +20,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+        <activity
             android:name=".Admin_ProductDetail"
             android:exported="false" />
+        <activity
+         <activity
+            android:name=".OrderActivity"
+            android:exported="false" />
+        <activity
         <activity
             android:name=".CreateCategory"
             android:exported="false" />
         <activity
             android:name=".LoadingActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".AdminActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".TestImageDownloaded"
+            android:exported="true" />
+        <activity
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

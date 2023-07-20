@@ -25,4 +25,6 @@ public interface IUserDAO {
     public void delete(User... users);
     @Query("DELETE FROM User")
     void removeAll();
+    @Query("SELECT * FROM User WHERE userId =:userId")
+    User getUserByUserId(int userId);
 }
