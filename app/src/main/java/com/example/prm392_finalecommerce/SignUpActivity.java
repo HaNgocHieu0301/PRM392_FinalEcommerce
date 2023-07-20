@@ -11,13 +11,14 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.sql.Date;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
+import Repository.UserRepository;
 import models.User;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUp = findViewById(R.id.signup_button);
         login = findViewById(R.id.login);
 
-        Date currentTime = Calendar.getInstance().getTime();
+        Date currentTime = new Date(new java.util.Date().getTime());
 
 
 
@@ -63,10 +64,11 @@ public class SignUpActivity extends AppCompatActivity {
                 String Saddress = address.getText().toString();
                 String Spass = pass.getText().toString();
                 String Scpass = cpass.getText().toString();
-                Validate validate = new Validate();
 
+                Validate validate = new Validate();
                 String hasingPW = validate.doHashing(Spass);
                 String hasingCPW = validate.doHashing(Scpass);
+
                 boolean gender = false;
                 RadioGroup genderGroup = findViewById(R.id.gender_group);
                 int selectedId = genderGroup.getCheckedRadioButtonId();
@@ -76,12 +78,12 @@ public class SignUpActivity extends AppCompatActivity {
                     gender = true;
                 }
 
-                if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
-                    IUserDAO userDAO = UserRoomDatabase.getDatabase(SignUpActivity.this).userDAO();
-                    if (userDAO.getUserByUsername(Suname)==null){
+                UserRepository userRepository = new UserRepository(SignUpActivity.this.getApplication());
+                //if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
+                    if (userRepository.getUserByUsername(Suname)==null){
                         if (hasingPW.equals(hasingCPW)) {
-                            User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, (java.sql.Date) currentTime, (java.sql.Date) currentTime, false);
-                            userDAO.insert(user);
+                            User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, currentTime, currentTime, false);
+                            userRepository.insertUser(user);
                             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
@@ -92,7 +94,6 @@ public class SignUpActivity extends AppCompatActivity {
                         uname.requestFocus();
                         uname.setError("User existed! Please re-enter username");
                     }
-
                 }
             }
         });

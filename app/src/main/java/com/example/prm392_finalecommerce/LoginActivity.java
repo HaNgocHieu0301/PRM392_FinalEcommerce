@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
+import Repository.UserRepository;
 import models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,10 +46,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Validate validate = new Validate();
                 CookieManager cookieManager = CookieManager.getInstance();
-                IUserDAO userDAO = UserRoomDatabase.getDatabase(getApplicationContext()).userDAO();
-                String Uname = username.getText().toString();
-                String Pass = validate.doHashing(password.getText().toString());
-                User user = userDAO.getUserByUsername(Uname);
+                UserRepository userRepository = new UserRepository(LoginActivity.this.getApplication());
+                String un = username.getText().toString();
+                User user = userRepository.getUserByUsername(un);
                 if (user != null) {
                     if (Pass.equals(user.password)) {
                         cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");

@@ -1,18 +1,22 @@
 package Repository;
 
 import android.app.Application;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
-import java.util.UUID;
 
+import DAOs.DataInsertionCallback;
 import DAOs.IUserDAO;
 import DAOs.UserRoomDatabase;
 import models.Product;
@@ -23,23 +27,24 @@ public class UserRepository {
     IUserDAO userDAO;
     private List<User> users;
 
-    public UserRepository(Application application){
+    public UserRepository(Application application) {
         userRoomDatabase = UserRoomDatabase.getDatabase(application);
         userDAO = userRoomDatabase.userDAO();
         users = userDAO.getAll();
     }
 
-    public void insertUser(User...users){
-        for (User u : users) {
-            String uniqueId = "";
-            do{
-                UUID uuid = UUID.randomUUID();
-                uniqueId = uuid.toString();
-                u.userId = uniqueId;
-            }while(!isUserPrimaryKeyValid(uniqueId));
+    public void insertUser(User... users) {
+        for (int i = 0; i < users.length; i++) {
+            long id = userRoomDatabase.userDAO().insert(users)[i];
+            User u = users[i];
+            u.setUserId(0);
             FirebaseFirestore.getInstance().collection("users").add(u);
         }
-        userRoomDatabase.userDAO().insert(users);
+        //long idxx = userRoomDatabase.userDAO().insert(users)[0];
+    }
+
+    public User getUserByUsername(String uname) {
+        return userRoomDatabase.userDAO().getUserByUsername(uname);
     }
 
     private boolean isUserPrimaryKeyValid(String uniqueId) {
@@ -50,25 +55,28 @@ public class UserRepository {
         }
         return true;
     }
-
-    public List<User> getAllUser(){
+    
+    
+    public List<User> getAllUser() {
         return users;
     }
-    public void InsertDataFromFirebaseToSqlite(Application application ) {
-        Task<QuerySnapshot> task = FirebaseFirestore.getInstance()
-                .collection("users")
-                .get();
-        task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
+    public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionCallback callback) {
+
+        FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 userDAO.removeAll();
-                List<DocumentSnapshot> lst = queryDocumentSnapshots.getDocuments();
-                for (DocumentSnapshot d : lst) {
-                    User p = d.toObject(User.class);
+                List<DocumentSnapshot> documentList = task.getResult().getDocuments();
+                for (DocumentSnapshot document : documentList) {
+                    User p = document.toObject(User.class);
                     userDAO.insert(p);
+                }
+                // Gọi callback khi quá trình chèn hoàn thành
+                if (callback != null) {
+                    callback.onDataInserted();
                 }
             }
         });
     }
-
 }
