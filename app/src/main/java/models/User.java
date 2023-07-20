@@ -15,9 +15,9 @@ import Helper.Converters;
 @Entity(tableName = "User")
 @TypeConverters({Converters.class})
 public class User {
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     @NotNull
-    public String userId;
+    public int userId;
     @NotNull
     public String username;
     @NotNull

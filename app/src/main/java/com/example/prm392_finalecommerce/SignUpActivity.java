@@ -25,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText email, uname, fname, lname, phone, address, pass, cpass;
     Button signUp;
     TextView login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,8 +44,6 @@ public class SignUpActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
 
         Date currentTime = new Date(new java.util.Date().getTime());
-
-
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,20 +79,19 @@ public class SignUpActivity extends AppCompatActivity {
 
                 UserRepository userRepository = new UserRepository(SignUpActivity.this.getApplication());
                 //if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
-                    if (userRepository.getUserByUsername(Suname)==null){
-                        if (hasingPW.equals(hasingCPW)) {
-                            User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, currentTime, currentTime, false);
-                            userRepository.insertUser(user);
-                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        } else {
-                            cpass.requestFocus();
-                            cpass.setError("Confirm password and password are not the same");
-                        }
-                    }else{
-                        uname.requestFocus();
-                        uname.setError("User existed! Please re-enter username");
+                if (userRepository.getUserByUsername(Suname) == null) {
+                    if (hasingPW.equals(hasingCPW)) {
+                        User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, currentTime, currentTime, false);
+                        userRepository.insertUser(user);
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        cpass.requestFocus();
+                        cpass.setError("Confirm password and password are not the same");
                     }
+                } else {
+                    uname.requestFocus();
+                    uname.setError("User existed! Please re-enter username");
                 }
             }
         });
