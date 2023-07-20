@@ -62,6 +62,8 @@ public class WishListAdapters extends RecyclerView.Adapter<WishListAdapters.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductRepository productRepository = new ProductRepository(application);
         Product product = productRepository.getProductById(wishList.get(position).productId);
+        if(product == null)
+            return;
         Glide.with(context).load(product.image).into(holder.image);
         holder.name.setText(product.productName);
         holder.price.setText("$ "+product.price);
@@ -75,6 +77,7 @@ public class WishListAdapters extends RecyclerView.Adapter<WishListAdapters.View
 //        holder.wishQuantity.setValue(qty>unitsInStock?unitsInStock:qty);
         holder.wishQuantity.setText((qty>unitsInStock?unitsInStock:qty) +"");
         holder.unitsInStock.setText(" "+unitsInStock+" available");
+        holder.wishId.setText(""+wishList.get(position).wishId);
         if(unitsInStock==0)
         {
             holder.unitsInStock.setTextColor(Color.RED);
@@ -201,7 +204,7 @@ public class WishListAdapters extends RecyclerView.Adapter<WishListAdapters.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView name, price, discount, unitsInStock, wishQuantity;
+        TextView name, price, discount, unitsInStock, wishQuantity, wishId;
 //        NumberPicker wishQuantity;
         Button remove, minus, add;
         CheckBox checked;
@@ -213,6 +216,7 @@ public class WishListAdapters extends RecyclerView.Adapter<WishListAdapters.View
             discount = itemView.findViewById(R.id.productDiscountWL);
             unitsInStock = itemView.findViewById(R.id.productUnitsInStockWL);
             wishQuantity = itemView.findViewById(R.id.txtWishQuantityWL);
+            wishId = itemView.findViewById(R.id.wishId);
             remove = itemView.findViewById(R.id.btnRemoveWL);
             checked = itemView.findViewById(R.id.cbCheckWL);
             minus = itemView.findViewById(R.id.btnMinus);

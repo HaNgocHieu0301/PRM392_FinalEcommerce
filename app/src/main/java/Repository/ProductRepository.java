@@ -33,6 +33,7 @@ import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
 import models.Category;
 import models.Product;
+import models.Wish;
 
 public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
@@ -53,8 +54,18 @@ public class ProductRepository {
         }
     }
 
+    public List<Product> GetProductsShow(List<Product> productList){
+        List<Product> newList = new ArrayList<>();
+        for(Product product : productList)
+        {
+            if(product.isShow)
+                newList.add(product);
+        }
+        return newList;
+    }
+
     public List<Product> getAllProducts() {
-        return products;
+        return GetProductsShow(products);
     }
     
     public List<Product> getAllShowedProducts(){
@@ -84,7 +95,7 @@ public class ProductRepository {
                 }
             }
         }
-        return res;
+        return GetProductsShow(res);
     }
 
     public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionCallback callback) {
@@ -126,5 +137,9 @@ public class ProductRepository {
                 }
             }
         });
+    }
+
+    public void updateProduct(Product product) {
+        productDAO.update(product);
     }
 }

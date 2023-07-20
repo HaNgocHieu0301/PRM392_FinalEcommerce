@@ -65,4 +65,8 @@ public class UserRepository {
             }
         });
     }
+
+    public User getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
 }

@@ -117,7 +117,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             cartBtn = itemView.findViewById(R.id.btn_add_cart);
 
 //                    --------------------------GET USER ID HERE -----------------------------------
-            int userId = 0;
+            int userId = 1;
             popImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

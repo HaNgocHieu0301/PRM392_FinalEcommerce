@@ -78,7 +78,7 @@ public class ProductDetail extends NavHelperFragment{
             @Override
             public void onClick(View v) {
 //                ---------------------------- GET USER ID --------------------------------
-                int userId = 0;
+                int userId = 1;
                 WishRepository wishRepository = new WishRepository(getActivity().getApplication());
                 Wish wish = wishRepository.getWishByUserIdAndProductId(userId, productId);
                 int wishQuantity = Integer.parseInt(binding.txtWishQuantity.getText().toString());

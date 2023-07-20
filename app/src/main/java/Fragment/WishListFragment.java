@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -15,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.prm392_finalecommerce.OrderActivity;
 import com.example.prm392_finalecommerce.R;
 import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
 import com.example.prm392_finalecommerce.databinding.FragmentWishListBinding;
@@ -64,7 +68,7 @@ public class WishListFragment extends Fragment implements WishListAdapters.IWish
 //        repo2.insertItem(new Wish(0, 4, 4));
 
         //----------------------------------- get userId from session----------------------------
-        int userId = 0; //get user id
+        int userId = 1; //get user id
         //
         binding = FragmentWishListBinding.inflate(inflater, container, false);
         wishList = new WishRepository(getActivity().getApplication()).getWishList(userId);
@@ -82,6 +86,22 @@ public class WishListFragment extends Fragment implements WishListAdapters.IWish
             @Override
             public void onClick(View v) {
                 setRecyclerViewItemsChecked(cbAll.isChecked());
+            }
+        });
+
+        TextView btnBuy = binding.btnBuy;
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Integer> wishIdList = (ArrayList<Integer>)GetWishIdsFromCheckedBox();
+                if(wishIdList.size()==0)
+                {
+                    Toast.makeText(getActivity(), "No products selected yet!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putIntegerArrayListExtra("wishIdList", wishIdList);
+                startActivity(intent,null);
             }
         });
         return root;
@@ -112,6 +132,27 @@ public class WishListFragment extends Fragment implements WishListAdapters.IWish
             if(checkBox.isClickable())
                 checkBox.setChecked(checked);
         }
+    }
+
+    public List<Integer> GetWishIdsFromCheckedBox()
+    {
+        List<Integer> wishIds = new ArrayList<Integer>();
+        for (int i = 0; i < wishListRec.getChildCount(); i++) {
+            View view = wishListRec.getChildAt(i);
+            RecyclerView.ViewHolder viewHolder = wishListRec.getChildViewHolder(view);
+            CheckBox checkBox = viewHolder.itemView.findViewById(R.id.cbCheckWL);
+            if(checkBox.isChecked())
+            {
+                TextView text = viewHolder.itemView.findViewById(R.id.wishId);
+                String idStr = text.getText().toString();
+                if(idStr != null && idStr != "")
+                {
+                    int wishId = Integer.parseInt(idStr);
+                    wishIds.add(wishId);
+                }
+            }
+        }
+        return wishIds;
     }
 
 }
