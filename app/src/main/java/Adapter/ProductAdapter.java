@@ -28,7 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     private List<Product> productList;
     private onClickListener listener;
 
-    public ProductAdapter(List<Product> mProducts,Context context, onClickListener listener) {
+    public ProductAdapter(List<Product> mProducts,Context context) {
         this.context = context;
         productList = mProducts;
     }

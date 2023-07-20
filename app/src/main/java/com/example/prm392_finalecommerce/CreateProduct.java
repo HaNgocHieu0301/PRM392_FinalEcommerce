@@ -134,7 +134,7 @@ public class CreateProduct extends AppCompatActivity {
 //                .collection("products")
 //                .document(id)
 //                .set(p);
-        repository.UpdateProduct(p);
+        repository.updateProduct(p);
 
         Toast.makeText(CreateProduct.this, "Update successfully!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(CreateProduct.this, HomeActivity.class);
@@ -163,7 +163,7 @@ public class CreateProduct extends AppCompatActivity {
                                         ProductRepository repository = new ProductRepository(getApplication());
                                         Product p = repository.getProductById((int) dbId);
                                         p.image = uri.toString();
-                                        repository.UpdateProduct(p);
+                                        repository.updateProduct(p);
                                     }
                                 });
                     }
@@ -189,7 +189,7 @@ public class CreateProduct extends AppCompatActivity {
                                         ProductRepository repository = new ProductRepository(getApplication());
                                         Product p = repository.getProductById((int) dbId);
                                         p.image = uri.toString();
-                                        repository.UpdateProduct(p);
+                                        repository.updateProduct(p);
                                     }
                                 });
                     }
@@ -225,7 +225,7 @@ public class CreateProduct extends AppCompatActivity {
                         px.unitsInStock = pTmp.unitsInStock;
                         px.description = pTmp.description;
                         ProductRepository repository = new ProductRepository(getApplication());
-                        dbId = (int)repository.insertProduct(px);
+                        dbId = (int)repository.insertProducts(px);
                     }
                 });
     }

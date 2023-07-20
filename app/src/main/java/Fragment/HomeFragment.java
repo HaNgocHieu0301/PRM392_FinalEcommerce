@@ -30,6 +30,7 @@ import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
 import java.util.ArrayList;
 import java.util.List;
 import Adapter.PopularAdapters;
+import DAOs.ProductRoomDatabase;
 import Repository.CategoryRepository;
 import Repository.ProductRepository;
 import Repository.UserRepository;
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 ProductRepository repo = new ProductRepository(getActivity().getApplication());
                 if(item.equals("All"))
-                    productList = new ArrayList<>(repo.getAllProducts());
+                    productList = new ArrayList<>(ProductRoomDatabase.getDatabase(getActivity().getApplication()).productDAO().getAll());
                 else
                     productList = new ArrayList<>(repo.getAllProductsByCategoryName(getActivity().getApplication(), item));
                 popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), HomeFragment.this::viewProductDetail);

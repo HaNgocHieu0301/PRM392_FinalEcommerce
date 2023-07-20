@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import Adapter.ProductAdapter;
 import DAOs.DataInsertionCallback;
 import DAOs.ProductRoomDatabase;
 import Repository.ProductRepository;

@@ -23,7 +23,7 @@ import java.util.List;
 
 import DAOs.ProductRoomDatabase;
 import models.Product;
-public class Admin_ProductFragment extends Fragment implements ProductAdapter.onClickListener {
+public class Admin_ProductFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,19 +40,9 @@ public class Admin_ProductFragment extends Fragment implements ProductAdapter.on
         });
         RecyclerView recyclerView = view.findViewById(R.id.productRecycler);
         List<Product> productList = new ArrayList<>(ProductRoomDatabase.getDatabase(getActivity().getApplication()).productDAO().getAll());
-        ProductAdapter productAdapter = new ProductAdapter(productList, getActivity().getApplication(), this::viewProductDetail);
+        ProductAdapter productAdapter = new ProductAdapter(productList, getActivity().getApplication());
         recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
-    }
-
-    @Override
-    public void viewProductDetail(int productId) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment newFragment = new Admin_ProductDetailFragment(productId);
-        fragmentTransaction.replace(R.id.llConatainer, newFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 }

@@ -41,7 +41,7 @@ public class DashboardActivity extends AppCompatActivity implements DataInsertio
         textViewAmount.setText(""+ProductRoomDatabase.getDatabase(DashboardActivity.this).productDAO().getAll().size());
         RecyclerView recyclerView = findViewById(R.id.productRecycler);
         List<Product> productList = new ArrayList<>(ProductRoomDatabase.getDatabase(DashboardActivity.this).productDAO().getAll());
-        productAdapter = new ProductAdapter(productList, DashboardActivity.this, this::viewProductDetail);
+        productAdapter = new ProductAdapter(productList, DashboardActivity.this);
         recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

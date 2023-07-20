@@ -15,12 +15,14 @@ import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
 import models.Category;
 import models.Product;
+import models.ProductTmp;
 import models.Wish;
 
 public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
     IProductDAO productDAO;
     private List<Product> products;
+
     public ProductRepository(Application application) {
         productRoomDatabase = ProductRoomDatabase.getDatabase(application);
         productDAO = productRoomDatabase.productDAO();
@@ -30,17 +32,20 @@ public class ProductRepository {
     public void insertProducts(Product... products) {
         for (int i = 0; i < products.length; i++) {
             long id = productRoomDatabase.productDAO().insert(products)[i];
-        //     Product p = products[i];
-        //    p.productId = 0;
-        //    FirebaseFirestore.getInstance().collection("products").add(p);
+            //     Product p = products[i];
+            //    p.productId = 0;
+            //    FirebaseFirestore.getInstance().collection("products").add(p);
         }
     }
 
-    public List<Product> GetProductsShow(List<Product> productList){
+    public long insertProducts(Product product) {
+        return productRoomDatabase.productDAO().insert(product)[0];
+    }
+
+    public List<Product> GetProductsShow(List<Product> productList) {
         List<Product> newList = new ArrayList<>();
-        for(Product product : productList)
-        {
-            if(product.isShow)
+        for (Product product : productList) {
+            if (product.isShow)
                 newList.add(product);
         }
         return newList;
@@ -49,8 +54,8 @@ public class ProductRepository {
     public List<Product> getAllProducts() {
         return GetProductsShow(products);
     }
-    
-    public List<Product> getAllShowedProducts(){
+
+    public List<Product> getAllShowedProducts() {
         List<Product> filteredList = new ArrayList<>();
         for (Product obj : products) {
             if (obj.isShow) {
@@ -107,7 +112,8 @@ public class ProductRepository {
             }
         });
     }
-    public Product getProductById(int id){
+
+    public Product getProductById(int id) {
         return productDAO.getProductById(id);
     }
 
