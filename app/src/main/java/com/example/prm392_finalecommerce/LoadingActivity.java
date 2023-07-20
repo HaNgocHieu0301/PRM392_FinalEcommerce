@@ -26,7 +26,7 @@ public class LoadingActivity extends AppCompatActivity{
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoadingActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

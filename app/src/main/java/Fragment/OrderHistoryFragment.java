@@ -1,5 +1,7 @@
 package Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -46,24 +48,10 @@ public class OrderHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentOrderHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //userID
-        int userId = 1;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", 1);
         rec = binding.orderHistoryRec;
         OrderRepository repo = new OrderRepository(getActivity().getApplication());
-        //--init data--
-//        Order o = new Order();
-//        o.userId = 1;
-//        o.total = 123.12;
-//        o.statusId = 0;
-//        o.shippedDate = "21/07/2023";
-//        o.orderDate = "21/07/2023";
-//        o.shipAddress = "address";
-//        o.shipPhone = "123";
-//        o.shipName = "khanh";
-//        repo.InsertOrder(o);
-//        o.statusId = 3;
-//        repo.InsertOrder(o);
-
         orderList = new ArrayList<>(repo.GetOrdersByUserId(userId));
         adapter = new OrderHistoryAdapters(getContext(), orderList, getActivity().getApplication());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

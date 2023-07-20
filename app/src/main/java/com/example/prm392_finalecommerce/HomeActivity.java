@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.prm392_finalecommerce.databinding.ActivityHomeBinding;
 import com.example.prm392_finalecommerce.databinding.ActivityMainBinding;
