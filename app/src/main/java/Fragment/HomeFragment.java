@@ -24,17 +24,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.prm392_finalecommerce.R;
 import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import Adapter.PopularAdapters;
-import DAOs.ProductRoomDatabase;
 import Repository.CategoryRepository;
 import Repository.ProductRepository;
 import models.Category;

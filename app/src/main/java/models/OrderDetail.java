@@ -1,5 +1,6 @@
 package models;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,46 +10,27 @@ import org.jetbrains.annotations.NotNull;
 public class OrderDetail {
     @PrimaryKey(autoGenerate = true)
     @NotNull
-    private String orderDetailId;
-    @NotNull
-    private String orderId;
-    @NotNull
-    private String productId;
-    @NotNull
-    private int quantity;
+    @ColumnInfo(name = "orderDetailId")
+    public int orderDetailId;
 
     @NotNull
-    public String getOrderDetailId() {
-        return orderDetailId;
-    }
-
-    public void setOrderDetailId(@NotNull String orderDetailId) {
-        this.orderDetailId = orderDetailId;
-    }
+    @ColumnInfo(name = "orderId")
+    public int orderId;
 
     @NotNull
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(@NotNull String orderId) {
-        this.orderId = orderId;
-    }
+    @ColumnInfo(name = "productId")
+    public int productId;
 
     @NotNull
-    public String getProductId() {
-        return productId;
-    }
+    @ColumnInfo(name = "unitPrice")
+    public double unitPrice;
 
-    public void setProductId(@NotNull String productId) {
-        this.productId = productId;
-    }
+    @NotNull
+    @ColumnInfo(name = "quantity")
+    public int quantity;
 
-    public int getQuantity() {
-        return quantity;
-    }
+    @NotNull
+    @ColumnInfo(name = "discount")
+    public double discount;
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

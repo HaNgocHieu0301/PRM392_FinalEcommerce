@@ -1,84 +1,62 @@
 package models;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.List;
 
+import Helper.Converters;
+
 @Entity(tableName = "Order")
+@TypeConverters({Converters.class})
 public class Order {
     @PrimaryKey(autoGenerate = true)
     @NotNull
-    private String orderId;
+    @ColumnInfo(name = "orderId")
+    public int orderId;
+
+    @ColumnInfo(name = "userId")
     @NotNull
-    private String userId;
+    public int userId;
+
+    @ColumnInfo(name = "orderDate")
     @NotNull
-    private Date created_at;
-    private Date modified_at;
+    public Date orderDate;
+
+    @ColumnInfo(name = "shippedDate")
+    public Date shippedDate;
+
+    @ColumnInfo(name = "shipAddress")
     @NotNull
-    private int statusId;
-    private List<OrderDetail> orderDetails;
-    private double total;
+    public String shipAddress;      //dia chi nhan hang
 
+    @ColumnInfo(name = "shipPhone")
     @NotNull
-    public String getOrderId() {
-        return orderId;
-    }
+    public String shipPhone;        //sdt nhan hang
 
-    public void setOrderId(@NotNull String orderId) {
-        this.orderId = orderId;
-    }
-
+    @ColumnInfo(name = "shipName")
     @NotNull
-    public String getUserId() {
-        return userId;
-    }
+    public String shipName;         //ten nguoi nhan hang
 
-    public void setUserId(@NotNull String userId) {
-        this.userId = userId;
-    }
-
+    @ColumnInfo(name = "statusId")
     @NotNull
-    public Date getCreated_at() {
-        return created_at;
-    }
+    public int statusId;            //0: chờ xác nhận; 1: đã xác nhận; 2: giao thành công; 3: hủy/giao thất bại
 
-    public void setCreated_at(@NotNull Date created_at) {
-        this.created_at = created_at;
-    }
+    @ColumnInfo(name = "total")
+    public double total;
 
-    public Date getModified_at() {
-        return modified_at;
-    }
+    public List<OrderDetail> orderDetails;
 
-    public void setModified_at(Date modified_at) {
-        this.modified_at = modified_at;
-    }
-
-    public int getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
-    public double getTotal() {
+    public double GetTotal(){
+        total = 0;
+        for (OrderDetail od: orderDetails) {
+            total += (od.unitPrice*od.quantity)*(1-od.discount/100);
+        }
         return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
     }
 }

@@ -11,7 +11,7 @@ import Repository.DataInsertionByFirebaseCallback;
 import Repository.ProductRepository;
 import Repository.UserRepository;
 
-public class LoadingActivity extends AppCompatActivity{
+public class LoadingActivity extends AppCompatActivity implements DataInsertionByFirebaseCallback{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +19,20 @@ public class LoadingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_loading);
 
         ProductRepository productRepository = new ProductRepository(LoadingActivity.this.getApplication());
-        productRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication());
-        UserRepository userRepository = new UserRepository(LoadingActivity.this.getApplication());
-        //userRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication());
+        productRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication(), this);
+        //UserRepository userRepository = new UserRepository(LoadingActivity.this.getApplication());
+    }
+
+    @Override
+    public void onDataInserted() {
+        Intent intent = new Intent(LoadingActivity.this, AdminActivity.class);
+        startActivity(intent);
         Button nextPage = findViewById(R.id.buttonNextToLogin);
-        nextPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoadingActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        nextPage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 }
