@@ -26,4 +26,8 @@ public class OrderRepository {
         return orderDAO.insert(order);
     }
 
+    public List<Order> GetOrdersByUserId(int userId)
+    {
+        return orderDAO.getOrderByUserId(userId);
+    }
 }

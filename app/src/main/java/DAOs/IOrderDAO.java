@@ -23,4 +23,7 @@ public interface IOrderDAO {
     void delete(Order... products);
     @Query("SELECT * FROM `Order` WHERE orderId = (SELECT MAX(orderId) FROM `Order`)")
     Order getLastestOrder();
+
+    @Query("SELECT * FROM `Order` WHERE userId = :userId")
+    List<Order> getOrderByUserId(int userId);
 }

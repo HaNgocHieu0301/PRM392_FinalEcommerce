@@ -13,6 +13,10 @@
             android:icon="@drawable/cart_icon"
             android:title="Cart" />
         <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/history_icon"
+            android:title="Order History" />
+        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/user_icon"
             android:title="Account" />
