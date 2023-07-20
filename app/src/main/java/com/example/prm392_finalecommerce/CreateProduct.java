@@ -13,7 +13,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.util.List;
+import java.util.UUID;
 
 import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
@@ -49,27 +56,40 @@ public class CreateProduct extends AppCompatActivity {
             }
         });
 
-//        imageProductImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("/image/*");
-//                startActivityForResult(intent, 100);
-//            }
-//        });
+        imageProductImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("/image/*");
+                startActivityForResult(intent, 100);
+            }
+        });
 
         buttonUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView quantity = findViewById(R.id.textViewQuantity);
-                quantity.setText(""+ProductRoomDatabase.getDatabase(CreateProduct.this).productDAO().getAll().size());
                 //uploadImage();
             }
         });
     }
-    private void uploadImage(){
-//        Storag
-    }
+//    private void uploadImage(){
+//        StorageReference storageReference = FirebaseStorage.getInstance().getReference("products/"+ UUID.randomUUID()+".png");
+//        storageReference.putFile(uri)
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        storageReference.getDownloadUrl()
+//                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//                                        FirebaseFirestore.getInstance()
+//                                                .collection("products")
+//                                                .update("image", uri.toString());
+//                                    }
+//                                })
+//                    }
+//                })
+//    }
     private void addProduct(){
         Product p = new Product();
         p.productName = editTextProductName.getText().toString();

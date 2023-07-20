@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
 //                new Product("Clothes", 0, 10, "", 200, 300, "Clothes des"),
 //                new Product("Giay", 0, 10, "", 200, 300, "Clothes des")
 //                );
-        popularAdapters = new PopularAdapters(getActivity(), productList);
+        popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         popularRec.setAdapter(popularAdapters);
         popularRec.setLayoutManager(linearLayoutManager);
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
                     productList = new ArrayList<>(repo.getAllProducts());
                 else
                     productList = new ArrayList<>(repo.getAllProductsByCategoryName(getActivity().getApplication(), item));
-                popularAdapters = new PopularAdapters(getActivity(), productList);
+                popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), HomeFragment.this::viewProductDetail);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 popularRec.setAdapter(popularAdapters);
                 popularRec.setLayoutManager(linearLayoutManager);

@@ -37,7 +37,7 @@ public class UserRepository {
         for (int i = 0; i < users.length; i++) {
             long id = userRoomDatabase.userDAO().insert(users)[i];
             User u = users[i];
-            u.setUserId((int) id);
+            u.setUserId(0);
             FirebaseFirestore.getInstance().collection("users").add(u);
         }
         //long idxx = userRoomDatabase.userDAO().insert(users)[0];

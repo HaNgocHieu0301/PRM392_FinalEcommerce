@@ -25,6 +25,7 @@ public class CategoryRepository {
     public void insertCategories(Category...categories){
         categoryRoomDatabase.categoryDAO().insert(categories);
     }
+
     public List<Category> getAllCategories(){
         return categories;
     }

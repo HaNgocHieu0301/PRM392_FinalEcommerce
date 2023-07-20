@@ -342,7 +342,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/shopping_cart/baseline_shopping_cart_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/add_circle_outline/baseline_add_circle_outline_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -352,8 +352,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="opacityPercent" value="50" />
-                            <entry key="outputName" value="cart_img" />
+                            <entry key="color" value="ff0000" />
+                            <entry key="opacityPercent" value="80" />
+                            <entry key="outputName" value="baseline_add_circle_outline_24" />
                             <entry key="sourceFile" value="C:\Users\Mai\OneDrive\Documents\SE1637\SU23\PRM392\Project" />
                           </map>
                         </option>

@@ -19,32 +19,33 @@
         android:theme="@style/Theme.PRM392_FinalEcommerce"
         tools:targetApi="31">
         <activity
+            android:name=".CreateCategory"
+            android:exported="false" />
+        <activity
             android:name=".AdminActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".TestImageDownloaded"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".DashboardActivity"
             android:exported="true"
-            android:theme="@style/NoAction">
-        </activity>
+            android:theme="@style/NoAction"></activity>
         <activity
             android:name=".CreateProduct"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -53,8 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.prm392_finalecommerce;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +76,15 @@ public class Fragment_Admin_Product extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__admin__product, container, false);
+
+        FloatingActionButton addNewProduct = (FloatingActionButton) view.findViewById(R.id.buttonAddNewProduct);
+        addNewProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateProduct.class);
+                startActivity(intent);
+            }
+        });
         RecyclerView recyclerView = view.findViewById(R.id.productRecycler);
         List<Product> productList = new ArrayList<>(ProductRoomDatabase.getDatabase(getActivity().getApplication()).productDAO().getAll());
         ProductAdapter productAdapter = new ProductAdapter(productList, getActivity().getApplication());

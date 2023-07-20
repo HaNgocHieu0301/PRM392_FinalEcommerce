@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_Admin_Category">
-
-<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-    <TextView
-        android:id="@+id/tvTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="1"
-        android:textSize="46sp"
-        android:textColor="@color/purple_500"
-        android:textStyle="bold"/>
-</RelativeLayout>
+    tools:context=".Fragment_Admin_Category"
+    android:orientation="vertical">
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/buttonAddNewCategory"-->
+<!--        app:fabSize="normal"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:src="@drawable/baseline_add_circle_outline_24"/>-->
+</LinearLayout>

@@ -43,9 +43,8 @@ public class ProductRepository {
     public void insertProducts(Product... products) {
         for (int i = 0; i < products.length; i++) {
             long id = productRoomDatabase.productDAO().insert(products)[i];
-
             Product p = products[i];
-            p.productId = (int) id;
+            p.productId = 0;
             FirebaseFirestore.getInstance().collection("products").add(p);
         }
     }
@@ -103,8 +102,8 @@ public class ProductRepository {
                 }
             }
         });
+    }
     public Product getProductById(int id){
         return productDAO.getProductById(id);
-    }
     }
 }
