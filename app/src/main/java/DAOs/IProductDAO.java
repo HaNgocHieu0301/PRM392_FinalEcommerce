@@ -24,10 +24,8 @@ public interface IProductDAO {
     void update(Product... products);
     @Delete
     void delete(Product... products);
-
     @Query("DELETE FROM Product")
     void removeAll();
-
     @Query("SELECT * FROM Product WHERE productId = :pId")
     Product getProductById(int pId);
 }

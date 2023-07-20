@@ -37,7 +37,7 @@ public class UserRepository {
         for (int i = 0; i < users.length; i++) {
             long id = userRoomDatabase.userDAO().insert(users)[i];
             User u = users[i];
-            u.setUserId(0);
+            u.userId = 0;
             FirebaseFirestore.getInstance().collection("users").add(u);
         }
         //long idxx = userRoomDatabase.userDAO().insert(users)[0];
@@ -47,21 +47,11 @@ public class UserRepository {
         return userRoomDatabase.userDAO().getUserByUsername(uname);
     }
 
-    private boolean isUserPrimaryKeyValid(String uniqueId) {
-        for (User p: users) {
-            if(p.userId == uniqueId){
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    
     public List<User> getAllUser() {
         return users;
     }
 
-    public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionCallback callback) {
+    public void InsertDataFromFirebaseToSqlite(Application application) {
 
         FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -71,10 +61,6 @@ public class UserRepository {
                 for (DocumentSnapshot document : documentList) {
                     User p = document.toObject(User.class);
                     userDAO.insert(p);
-                }
-                // Gọi callback khi quá trình chèn hoàn thành
-                if (callback != null) {
-                    callback.onDataInserted();
                 }
             }
         });

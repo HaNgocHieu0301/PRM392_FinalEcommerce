@@ -39,16 +39,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);            }
+                startActivity(intent);
+            }
         });
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Validate validate = new Validate();
                 CookieManager cookieManager = CookieManager.getInstance();
-                UserRepository userRepository = new UserRepository(LoginActivity.this.getApplication());
-                String un = username.getText().toString();
-                User user = userRepository.getUserByUsername(un);
+                IUserDAO userDAO = UserRoomDatabase.getDatabase(getApplicationContext()).userDAO();
+                String Uname = username.getText().toString();
+                String Pass = validate.doHashing(password.getText().toString());
+                User user = userDAO.getUserByUsername(Uname);
                 if (user != null) {
                     if (Pass.equals(user.password)) {
                         cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");

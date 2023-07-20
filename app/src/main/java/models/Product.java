@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity
 public class Product {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ProductId")
-    public String productId;
+    public int productId;
     @ColumnInfo(name = "ProductName")
     public String productName;
     @ColumnInfo(name = "CategoryId")

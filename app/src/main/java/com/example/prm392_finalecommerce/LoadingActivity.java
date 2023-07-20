@@ -21,13 +21,12 @@ public class LoadingActivity extends AppCompatActivity{
         ProductRepository productRepository = new ProductRepository(LoadingActivity.this.getApplication());
         productRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication());
         UserRepository userRepository = new UserRepository(LoadingActivity.this.getApplication());
-        userRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication());
-
+        //userRepository.InsertDataFromFirebaseToSqlite(LoadingActivity.this.getApplication());
         Button nextPage = findViewById(R.id.buttonNextToLogin);
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
+                Intent intent = new Intent(LoadingActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
