@@ -16,4 +16,6 @@ public interface IOrderDetailDAO {
     List<OrderDetail> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insert(OrderDetail... orderDetails);
+    @Query("SELECT * FROM OrderDetail WHERE orderId = :orderId")
+    List<OrderDetail> getListByOrderId(int orderId);
 }

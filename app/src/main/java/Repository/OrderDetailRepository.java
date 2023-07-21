@@ -2,6 +2,8 @@ package Repository;
 
 import android.app.Application;
 
+import java.util.List;
+
 import DAOs.IOrderDAO;
 import DAOs.IOrderDetailDAO;
 import DAOs.OrderDetailRoomDatabase;
@@ -20,5 +22,9 @@ public class OrderDetailRepository {
     }
     public void insertOrderDetail(OrderDetail orderDetail){
         orderDetailDAO.insert(orderDetail);
+    }
+
+    public List<OrderDetail> getListByOrderId(int orderId) {
+        return orderDetailDAO.getListByOrderId(orderId);
     }
 }

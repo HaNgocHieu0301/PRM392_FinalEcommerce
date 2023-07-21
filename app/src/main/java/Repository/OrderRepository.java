@@ -30,4 +30,8 @@ public class OrderRepository {
     {
         return orderDAO.getOrderByUserId(userId);
     }
+
+    public Order getOrderById(int orderId) {
+        return orderDAO.getOrderById(orderId);
+    }
 }
