@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.prm392_finalecommerce.OrderActivity;
 import com.example.prm392_finalecommerce.R;
-import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
 import com.example.prm392_finalecommerce.databinding.FragmentWishListBinding;
 
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ import Repository.ProductRepository;
 import Repository.WishRepository;
 import models.Product;
 import models.Wish;
-
 public class WishListFragment extends Fragment implements WishListAdapters.IWishListData {
     public WishListFragment() {
         // Required empty public constructor

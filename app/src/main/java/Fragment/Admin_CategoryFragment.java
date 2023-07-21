@@ -44,7 +44,7 @@ public class Admin_CategoryFragment extends Fragment {
         });
         RecyclerView recyclerView = view.findViewById(R.id.categoryRecycler);
         List<Category> categoryList = new ArrayList<>(CategoryRoomDatabase.getDatabase(getActivity().getApplication()).categoryDAO().getAll());
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, getActivity().getApplication());
+        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList,getContext() ,getActivity().getApplication());
         recyclerView.setAdapter(categoryAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;

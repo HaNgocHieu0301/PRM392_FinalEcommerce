@@ -56,8 +56,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 intent.putExtra("productName", p.productId);
                 view.getContext().startActivity(intent, null);
                 //listener.viewProductDetail(productId);
-
-
             }
         });
     }

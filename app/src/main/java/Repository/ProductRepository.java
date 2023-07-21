@@ -54,7 +54,9 @@ public class ProductRepository {
     public List<Product> getAllProducts() {
         return GetProductsShow(products);
     }
-
+    public List<Product> getAll(){
+        return productDAO.getAll();
+    }
     public List<Product> getAllShowedProducts() {
         List<Product> filteredList = new ArrayList<>();
         for (Product obj : products) {

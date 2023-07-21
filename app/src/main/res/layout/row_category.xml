@@ -2,19 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="15"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tvCategoryId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="5"
         android:text="Category Id" />
 
     <TextView
         android:id="@+id/tvCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:text="Category Name"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Category Name" />
+        android:background="@drawable/baseline_delete_24" />
 </LinearLayout>

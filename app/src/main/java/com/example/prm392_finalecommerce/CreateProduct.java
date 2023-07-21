@@ -12,9 +12,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,20 +34,24 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
+import DAOs.CategoryRoomDatabase;
 import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
 import Repository.ProductRepository;
+import models.Category;
 import models.Product;
 import models.ProductTmp;
 
-public class CreateProduct extends AppCompatActivity {
+public class CreateProduct extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     EditText editTextProductName, editTextCategory, editTextUnitsInStock,
             editTextDescription, editTextPrice, editTextDiscount;
     ImageView imageProductImage;
+    Spinner spinnerCategory;
     Button buttonAddProduct, buttonUploadImage;
     Uri uri;
     String imageUrl;
+    int categoryId;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
@@ -62,7 +69,7 @@ public class CreateProduct extends AppCompatActivity {
         editTextDiscount = findViewById(R.id.editTextDiscount);
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
         buttonUploadImage = findViewById(R.id.buttonUploadImage);
-
+        //spinnerCategory = findViewById(R.id.spinnerCategory);
         Intent intent = getIntent();
         dbId = intent.getIntExtra("productId", -1);
         ProductRepository repository = new ProductRepository(getApplication());
@@ -98,6 +105,10 @@ public class CreateProduct extends AppCompatActivity {
                     uploadImage();
                 }
             });
+            //spinnerCategory.setOnItemSelectedListener(this);
+            //ArrayAdapter<Category> adapter = new ArrayAdapter<>(CreateProduct.this, android.R.layout.simple_spinner_dropdown_item, CategoryRoomDatabase.getDatabase(getApplication()).categoryDAO().getAll());
+            //adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+            //spinnerCategory.setAdapter(adapter);
         } else {
             buttonAddProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -255,5 +266,17 @@ public class CreateProduct extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(getApplication(), "I chosen: " + i + " - " + l, Toast.LENGTH_SHORT).show();
+        Category selectedCategory = (Category) adapterView.getItemAtPosition(i);
+        categoryId = selectedCategory.getCategoryId();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

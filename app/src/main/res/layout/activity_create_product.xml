@@ -26,6 +26,11 @@
             android:hint="Category"
             android:padding="15dp" />
 
+<!--        <Spinner-->
+<!--            android:id="@+id/spinnerCategory"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
         <EditText
             android:id="@+id/editTextPrice"
             android:layout_width="match_parent"

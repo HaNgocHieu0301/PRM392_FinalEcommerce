@@ -65,7 +65,8 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
 //        userRepository.insertUser(u);
         popularRec = binding.popRec;
         ProductRepository repo = new ProductRepository(getActivity().getApplication());
-        productList = new ArrayList<>(repo.getAllProducts());
+        //productList = new ArrayList<>(repo.getAllProducts());
+        productList = new ArrayList<>(repo.getAll());
 //        repo.insertProducts(
 //                new Product("Candy", 1, 10, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 10, 100, "Candy des"),
 //                new Product("Laptop", 2, 20, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 30, 200, "Laptop des"),

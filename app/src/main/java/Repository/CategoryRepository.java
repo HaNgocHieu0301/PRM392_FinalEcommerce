@@ -33,7 +33,9 @@ public class CategoryRepository {
             FirebaseFirestore.getInstance().collection("categories").add(p);
         }
     }
-
+    public void deleteCategory(Category c){
+        categoryDAO.delete(c);
+    }
     public List<Category> getAllCategories(){
         return categories;
     }
