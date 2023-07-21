@@ -3,6 +3,7 @@ package com.example.prm392_finalecommerce;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +55,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     if (Pass.equals(user.password)) {
                         cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");
-                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("userId", user.userId);
+                        editor.apply();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();

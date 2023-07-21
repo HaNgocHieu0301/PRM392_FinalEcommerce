@@ -28,11 +28,12 @@ public class LoadingActivity extends AppCompatActivity implements DataInsertionB
         Intent intent = new Intent(LoadingActivity.this, AdminActivity.class);
         startActivity(intent);
         Button nextPage = findViewById(R.id.buttonNextToLogin);
-//        nextPage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        nextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

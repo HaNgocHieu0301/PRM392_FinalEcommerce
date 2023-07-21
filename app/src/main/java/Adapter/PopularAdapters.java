@@ -2,6 +2,7 @@ package Adapter;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,7 +118,8 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             cartBtn = itemView.findViewById(R.id.btn_add_cart);
 
 //                    --------------------------GET USER ID HERE -----------------------------------
-            int userId = 1;
+            SharedPreferences sharedPreferences = itemView.getContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+            int userId = sharedPreferences.getInt("userId", 1);
             popImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
