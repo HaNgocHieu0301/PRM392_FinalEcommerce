@@ -52,8 +52,6 @@ public class CreateProduct extends AppCompatActivity implements AdapterView.OnIt
     Uri uri;
     String imageUrl;
     int categoryId;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private static final int REQUEST_IMAGE_CAPTURE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +79,9 @@ public class CreateProduct extends AppCompatActivity implements AdapterView.OnIt
             editTextDescription.setText(p.description);
             editTextPrice.setText("" + p.price);
             editTextDiscount.setText("" + p.discount);
-//            Glide.with(getApplicationContext())
-//                    .load(p.image)
-//                    .into(imageProductImage);
+            Glide.with(getApplicationContext())
+                    .load(p.image)
+                    .into(imageProductImage);
             buttonAddProduct.setText("Update");
             buttonAddProduct.setOnClickListener(new View.OnClickListener() {
                 @Override

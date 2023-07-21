@@ -19,6 +19,7 @@ import java.util.List;
 
 import Adapter.OrderAdapter;
 import Adapter.ProductAdapter;
+import DAOs.OrderRoomDatabase;
 import DAOs.ProductRoomDatabase;
 import models.Order;
 import models.Product;
@@ -29,8 +30,8 @@ public class Admin_OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin__order, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.orderRecycler);
-        //List<Order> orderList = new ArrayList<>(OrderRoomDatabase.getDatabase(getActivity().getApplication()).orderDAO().getAll());
-        List<Order> orderList = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>(OrderRoomDatabase.getDatabase(getActivity().getApplication()).orderDAO().getAll());
+        //List<Order> orderList = new ArrayList<>();
         OrderAdapter orderAdapter = new OrderAdapter(orderList, getActivity().getApplication());
         recyclerView.setAdapter(orderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -26,4 +26,7 @@ public interface IOrderDAO {
 
     @Query("SELECT * FROM `Order` WHERE userId = :userId")
     List<Order> getOrderByUserId(int userId);
+
+    @Query("DELETE FROM `Order`")
+    void removeAll();
 }

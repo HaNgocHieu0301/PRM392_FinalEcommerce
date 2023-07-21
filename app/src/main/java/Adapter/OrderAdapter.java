@@ -32,7 +32,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_admin_order_history, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -59,7 +59,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orderList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

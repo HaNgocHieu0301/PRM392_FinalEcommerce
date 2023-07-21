@@ -64,7 +64,11 @@ public class Admin_ProductDetailFragment extends Fragment {
         btnHideProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ---------------------GO TO ORDER-----------------------------------
+                ProductRepository repo = new ProductRepository(getActivity().getApplication());
+                Product p = repo.getProductById(productId);
+                p.isShow = false;
+                repo.updateProduct(p);
+                Toast.makeText(getActivity().getApplication(), "Updated Success", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

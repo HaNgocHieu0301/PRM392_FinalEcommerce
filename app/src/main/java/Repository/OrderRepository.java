@@ -30,4 +30,8 @@ public class OrderRepository {
     {
         return orderDAO.getOrderByUserId(userId);
     }
+
+    public void removeAll() {
+        orderDAO.removeAll();
+    }
 }
