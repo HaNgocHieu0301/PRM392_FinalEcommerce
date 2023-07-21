@@ -3,13 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment_Admin_Category"
     android:orientation="vertical">
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/buttonAddNewCategory"-->
-<!--        app:fabSize="normal"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:src="@drawable/baseline_add_circle_outline_24"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAddNewCategory"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/baseline_add_circle_outline_24"/>
 </LinearLayout>

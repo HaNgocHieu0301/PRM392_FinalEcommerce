@@ -1,22 +1,6 @@
 package Repository;
 
 import android.app.Application;
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
-import com.example.prm392_finalecommerce.DashboardActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -26,19 +10,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import DAOs.DataInsertionCallback;
 import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
 import models.Category;
 import models.Product;
+import models.ProductTmp;
 import models.Wish;
 
 public class ProductRepository {
     ProductRoomDatabase productRoomDatabase;
     IProductDAO productDAO;
     private List<Product> products;
+
     public ProductRepository(Application application) {
         productRoomDatabase = ProductRoomDatabase.getDatabase(application);
         productDAO = productRoomDatabase.productDAO();
@@ -48,17 +32,20 @@ public class ProductRepository {
     public void insertProducts(Product... products) {
         for (int i = 0; i < products.length; i++) {
             long id = productRoomDatabase.productDAO().insert(products)[i];
-            Product p = products[i];
-            p.productId = 0;
-            FirebaseFirestore.getInstance().collection("products").add(p);
+            //     Product p = products[i];
+            //    p.productId = 0;
+            //    FirebaseFirestore.getInstance().collection("products").add(p);
         }
     }
 
-    public List<Product> GetProductsShow(List<Product> productList){
+    public long insertProducts(Product product) {
+        return productRoomDatabase.productDAO().insert(product)[0];
+    }
+
+    public List<Product> GetProductsShow(List<Product> productList) {
         List<Product> newList = new ArrayList<>();
-        for(Product product : productList)
-        {
-            if(product.isShow)
+        for (Product product : productList) {
+            if (product.isShow)
                 newList.add(product);
         }
         return newList;
@@ -67,8 +54,10 @@ public class ProductRepository {
     public List<Product> getAllProducts() {
         return GetProductsShow(products);
     }
-    
-    public List<Product> getAllShowedProducts(){
+    public List<Product> getAll(){
+        return productDAO.getAll();
+    }
+    public List<Product> getAllShowedProducts() {
         List<Product> filteredList = new ArrayList<>();
         for (Product obj : products) {
             if (obj.isShow) {
@@ -98,7 +87,8 @@ public class ProductRepository {
         return GetProductsShow(res);
     }
 
-    public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionCallback callback) {
+
+    public void InsertDataFromFirebaseToSqlite(Application application, DataInsertionByFirebaseCallback callback) {
         Task<QuerySnapshot> task = FirebaseFirestore.getInstance()
                 .collection("products")
                 .get();
@@ -108,17 +98,24 @@ public class ProductRepository {
                 productDAO.removeAll();
                 List<DocumentSnapshot> lst = queryDocumentSnapshots.getDocuments();
                 for (DocumentSnapshot d : lst) {
-                    Product p = d.toObject(Product.class);
+                    ProductTmp pTmp = d.toObject(ProductTmp.class);
+                    Product p = new Product();
+                    p.productName = pTmp.productName;
+                    p.price = pTmp.price;
+                    p.discount = pTmp.discount;
+                    p.unitsInStock = pTmp.unitsInStock;
+                    p.description = pTmp.description;
+                    p.image = pTmp.image;
                     productDAO.insert(p);
                 }
-                // Gọi callback khi quá trình chèn hoàn thành
                 if (callback != null) {
                     callback.onDataInserted();
                 }
             }
         });
     }
-    public Product getProductById(int id){
+
+    public Product getProductById(int id) {
         return productDAO.getProductById(id);
     }
 

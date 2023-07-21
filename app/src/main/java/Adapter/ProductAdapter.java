@@ -1,26 +1,32 @@
-package com.example.prm392_finalecommerce;
+package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.prm392_finalecommerce.Admin_ProductDetail;
+import com.example.prm392_finalecommerce.CreateProduct;
+import com.example.prm392_finalecommerce.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import Repository.ProductRepository;
 import models.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
 
     private Context context;
     private List<Product> productList;
+    private onClickListener listener;
 
     public ProductAdapter(List<Product> mProducts,Context context) {
         this.context = context;
@@ -30,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -41,6 +47,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.description.setText(p.description);
         holder.price.setText("" + p.price);
         Glide.with(context).load(p.image).into(holder.image);
+        holder.productId = p.productId;
+        holder.llProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), Admin_ProductDetail.class);
+                intent.putExtra("productId", p.productId);
+                intent.putExtra("productName", p.productId);
+                view.getContext().startActivity(intent, null);
+                //listener.viewProductDetail(productId);
+            }
+        });
     }
 
     @Override
@@ -50,13 +67,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView productName, description, price;
+        LinearLayout llProduct;
         ImageView image;
+        int productId;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.tvProductNameRow);
             description = itemView.findViewById(R.id.tvDescriptionRow);
             price = itemView.findViewById(R.id.tvPriceRow);
             image = itemView.findViewById(R.id.imageViewProductRow);
+            llProduct = itemView.findViewById(R.id.llProduct);
         }
+    }
+
+    public interface onClickListener{
+        void viewProductDetail(int productId);
     }
 }

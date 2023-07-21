@@ -24,15 +24,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.prm392_finalecommerce.R;
 import com.example.prm392_finalecommerce.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import Adapter.PopularAdapters;
 import DAOs.ProductRoomDatabase;
 import Repository.CategoryRepository;
@@ -69,7 +65,8 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
 //        userRepository.insertUser(u);
         popularRec = binding.popRec;
         ProductRepository repo = new ProductRepository(getActivity().getApplication());
-        productList = new ArrayList<>(repo.getAllProducts());
+        //productList = new ArrayList<>(repo.getAllProducts());
+        productList = new ArrayList<>(repo.getAll());
 //        repo.insertProducts(
 //                new Product("Candy", 1, 10, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 10, 100, "Candy des"),
 //                new Product("Laptop", 2, 20, "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg", 30, 200, "Laptop des"),
@@ -108,7 +105,7 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 ProductRepository repo = new ProductRepository(getActivity().getApplication());
                 if(item.equals("All"))
-                    productList = new ArrayList<>(repo.getAllProducts());
+                    productList = new ArrayList<>(ProductRoomDatabase.getDatabase(getActivity().getApplication()).productDAO().getAll());
                 else
                     productList = new ArrayList<>(repo.getAllProductsByCategoryName(getActivity().getApplication(), item));
                 popularAdapters = new PopularAdapters(getActivity(), productList, getActivity().getApplication(), HomeFragment.this::viewProductDetail);

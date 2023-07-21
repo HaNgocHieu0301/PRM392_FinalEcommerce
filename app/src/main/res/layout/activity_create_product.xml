@@ -26,6 +26,11 @@
             android:hint="Category"
             android:padding="15dp" />
 
+<!--        <Spinner-->
+<!--            android:id="@+id/spinnerCategory"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
         <EditText
             android:id="@+id/editTextPrice"
             android:layout_width="match_parent"
@@ -76,12 +81,6 @@
                     android:layout_height="match_parent" />
 
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/textViewQuantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="So luong: " />
 
             <Button
                 android:id="@+id/buttonUploadImage"

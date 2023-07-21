@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,14 +11,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAOs.DataInsertionCallback;
+import Adapter.ProductAdapter;
 import DAOs.IProductDAO;
 import DAOs.ProductRoomDatabase;
+import Repository.DataInsertionByFirebaseCallback;
 import Repository.ProductRepository;
-import Repository.UserRepository;
 import models.Product;
 
-public class DashboardActivity extends AppCompatActivity implements DataInsertionCallback {
+public class DashboardActivity extends AppCompatActivity implements DataInsertionByFirebaseCallback, ProductAdapter.onClickListener{
     ProductRoomDatabase db;
     IProductDAO productDao;
 
@@ -45,5 +44,10 @@ public class DashboardActivity extends AppCompatActivity implements DataInsertio
         productAdapter = new ProductAdapter(productList, DashboardActivity.this);
         recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void viewProductDetail(int productId) {
+
     }
 }

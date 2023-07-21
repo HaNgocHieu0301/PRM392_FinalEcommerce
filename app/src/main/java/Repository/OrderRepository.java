@@ -33,5 +33,8 @@ public class OrderRepository {
 
     public Order getOrderById(int orderId) {
         return orderDAO.getOrderById(orderId);
+
+    public void removeAll() {
+        orderDAO.removeAll();
     }
 }

@@ -17,11 +17,14 @@ public interface ICategoryDAO {
     @Query("SELECT * FROM Category")
     List<Category> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Category... categories);
+    long[] insert(Category... categories);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertACategory(Category category);
     @Update
     void update(Category... categories);
     @Delete
     void delete(Category... categories);
+
+    @Query("DELETE FROM Category")
+    void removeAll();
 }

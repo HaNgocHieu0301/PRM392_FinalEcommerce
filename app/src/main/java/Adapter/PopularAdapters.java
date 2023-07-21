@@ -125,7 +125,6 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
                 public void onClick(View v) {
                     int productId = Integer.parseInt(id.getText().toString());
                     listener.viewProductDetail(productId);
-
                 }
             });
             cartBtn.setOnClickListener(new View.OnClickListener() {

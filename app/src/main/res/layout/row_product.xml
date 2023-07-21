@@ -3,8 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+    <TextView
+        android:id="@+id/pop_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:text=""/>
     <LinearLayout
+        android:id="@+id/llProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
