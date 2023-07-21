@@ -47,14 +47,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Validate validate = new Validate();
-                CookieManager cookieManager = CookieManager.getInstance();
+//                CookieManager cookieManager = CookieManager.getInstance();
                 IUserDAO userDAO = UserRoomDatabase.getDatabase(getApplicationContext()).userDAO();
                 String Uname = username.getText().toString();
                 String Pass = validate.doHashing(password.getText().toString());
                 User user = userDAO.getUserByUsername(Uname);
                 if (user != null) {
                     if (Pass.equals(user.password)) {
-                        cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");
+//                        cookieManager.setCookie("https://login.com", "username=Uname; password=Pass");
                         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("userId", user.userId);

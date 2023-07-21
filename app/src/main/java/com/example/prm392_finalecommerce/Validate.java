@@ -48,7 +48,7 @@ public class Validate {
         }
     }
     public boolean checkPass (String str){
-        Pattern pattern = Pattern.compile(PassRegex);
+        Pattern pattern = Pattern.compile(StringRegex);
         Matcher matcher = pattern.matcher(str);
         if (matcher.matches()) {
             return true;

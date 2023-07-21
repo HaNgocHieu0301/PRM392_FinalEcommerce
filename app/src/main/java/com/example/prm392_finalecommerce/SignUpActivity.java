@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 UserRepository userRepository = new UserRepository(SignUpActivity.this.getApplication());
-                //if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
+                if (checkInfo(Suname, Spass, Sfname, Slname, Semail, Sphone, Saddress)) {
                 if (userRepository.getUserByUsername(Suname) == null) {
                     if (hasingPW.equals(hasingCPW)) {
                         User user = new User(Suname, hasingPW, Sfname, Slname, Semail, gender, Saddress, Sphone, currentTime, currentTime, false);
@@ -93,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                     uname.requestFocus();
                     uname.setError("User existed! Please re-enter username");
                 }
-            }
+            }}
         });
     }
 
