@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -67,9 +69,8 @@ public class WishListFragment extends Fragment implements WishListAdapters.IWish
 //        repo2.insertItem(new Wish(0, 3, 3));
 //        repo2.insertItem(new Wish(0, 4, 4));
 
-        //----------------------------------- get userId from session----------------------------
-        int userId = 1; //get user id
-        //
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", 1);
         binding = FragmentWishListBinding.inflate(inflater, container, false);
         wishList = new WishRepository(getActivity().getApplication()).getWishList(userId);
         View root = binding.getRoot();

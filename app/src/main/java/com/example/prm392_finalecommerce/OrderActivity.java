@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -57,9 +58,8 @@ public class OrderActivity extends AppCompatActivity {
             total += product.price * wish.quantity;
         }
 
-//----------------------------------- get userId from session----------------------------
-        int userId = 1; //get user id
-        //
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", 1);
         UserRepository userRepository = new UserRepository(this.getApplication());
         User user = userRepository.getUserByUserId(userId);
 

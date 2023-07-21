@@ -1,5 +1,7 @@
 package Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -77,8 +79,8 @@ public class ProductDetail extends NavHelperFragment{
         binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ---------------------------- GET USER ID --------------------------------
-                int userId = 1;
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                int userId = sharedPreferences.getInt("userId", 1);
                 WishRepository wishRepository = new WishRepository(getActivity().getApplication());
                 Wish wish = wishRepository.getWishByUserIdAndProductId(userId, productId);
                 int wishQuantity = Integer.parseInt(binding.txtWishQuantity.getText().toString());

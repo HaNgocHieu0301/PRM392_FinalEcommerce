@@ -57,6 +57,16 @@ public class HomeFragment extends Fragment implements PopularAdapters.onClickLis
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //products
+//        UserRepository userRepository = new UserRepository(getActivity().getApplication());
+//        User u = new User();
+//        u.userId = 2;
+//        u.username = "khanh";
+//        u.password = "1";
+//        u.first_name = "pham";
+//        u.last_name = "khanh";
+//        u.isMale = true;
+//        u.phoneNumber = "1230";
+//        userRepository.insertUser(u);
         popularRec = binding.popRec;
         ProductRepository repo = new ProductRepository(getActivity().getApplication());
         productList = new ArrayList<>(repo.getAllProducts());
